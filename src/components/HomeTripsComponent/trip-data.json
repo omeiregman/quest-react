@@ -1,0 +1,95 @@
+{
+"intlTrips" : [
+    {
+            "destination": "Cape Town",
+            "return_date": "2018-04-29",
+            "image_path_home_page": "small-trips-6.jpg",
+            "departure_date": "2018-04-24",
+            "package_price_2": "0",
+            "package_price": 550000,
+            "id": 1,
+            "image_path_single_page": "cape_town_2.jpg"
+        },
+        {
+            "destination": "Mykonos",
+            "return_date": "2018-07-03",
+            "image_path_home_page": "small-trips-5.jpg",
+            "departure_date": "2018-06-28",
+            "package_price_2": "0",
+            "package_price": 570000,
+            "id": 2,
+            "image_path_single_page": "Mykonos_2.jpg"
+        },
+        {
+            "destination": "Nairobi",
+            "return_date": "2018-07-31",
+            "image_path_home_page": "small-trips-7.jpg",
+            "departure_date": "2018-07-26",
+            "package_price_2": "0",
+            "package_price": 270000,
+            "id": 3,
+            "image_path_single_page": "Nairobi_2.jpg"
+        },
+        {
+            "destination": "Havana",
+            "return_date": "2018-08-28",
+            "image_path_home_page": "small-trips-8.jpg",
+            "departure_date": "2018-08-23",
+            "package_price_2": "0",
+            "package_price": 1000000,
+            "id": 4,
+            "image_path_single_page": "havana_2.jpg"
+        },
+        {
+            "destination": "Milan Fashion Week",
+            "return_date": "2018-08-22",
+            "image_path_home_page": "small-trips-3.jpg",
+            "departure_date": "2018-08-17",
+            "package_price_2": "0",
+            "package_price": 550000,
+            "id": 5,
+            "image_path_single_page": "Milan_Fashion_Week_2.jpg"
+        },
+        {
+            "destination": "Venice",
+            "return_date": "2018-09-25",
+            "image_path_home_page": "small-trips-4.jpg",
+            "departure_date": "2018-09-21",
+            "package_price_2": "0",
+            "package_price": 700000,
+            "id": 6,
+            "image_path_single_page": "Venice_2.jpg"
+        },
+        {
+            "destination": "Cancun",
+            "return_date": "2018-10-30",
+            "image_path_home_page": "small-trips-6.jpg",
+            "departure_date": "2018-10-25",
+            "package_price_2": "0",
+            "package_price": 650000,
+            "id": 7,
+            "image_path_single_page": "Cancun_2.jpg"
+        },
+        {
+            "destination": "Cairo",
+            "return_date": "2018-11-20",
+            "image_path_home_page": "home-img-3.jpg",
+            "departure_date": "2018-11-15",
+            "package_price_2": "0",
+            "package_price": 485000,
+            "id": 8,
+            "image_path_single_page": "Cairo_2.jpg"
+        },
+        {
+            "destination": "Zanzibar",
+            "return_date": "2018-12-29",
+            "image_path_home_page": "home-img-4.jpg",
+            "departure_date": "2018-12-24",
+            "package_price_2": "0",
+            "package_price": 550000,
+            "id": 9,
+            "image_path_single_page": "Zanzibar_2.jpg"
+        }
+    ]
+
+  }
