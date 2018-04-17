@@ -1,0 +1,245 @@
+
+.single-trips-header {
+  margin-top: 5%;
+  margin-left: 2%;
+  margin-bottom: 2%;
+}
+
+.single-trips-header h3 {
+  font-size: 28px;
+  font-family: "Lato";
+  color: rgb( 243, 235, 233 );
+  font-weight: bold;
+  font-style: italic;
+}
+
+.single-trip-save {
+    margin-left: 12%;
+    text-align: center;
+    border-radius: 15px;
+    background-color: rgb( 223, 189, 40 );
+    width: 35%;
+    height: 50%;
+    color: #fff;
+    float: left;
+    cursor: pointer;
+}
+
+.single-trip-share {
+  margin-left: 5px;
+    text-align: center;
+    border-radius: 15px;
+    background-color: rgb( 223, 189, 40 );
+    width: 25%;
+    height: 50%;
+    color: #fff;
+    float: left;
+    cursor: pointer;
+}
+
+.single-save-text {
+  padding: 5px;
+  font-size: 14px;
+  font-family: "Montserrat";
+  color: rgb( 80, 60, 97 );
+  font-weight: bold;
+  text-transform: uppercase;
+  line-height: 3;
+  text-align: center;
+}
+
+.single-trip-banner {
+  margin-top: 0px;
+  background: url('../img/single-trips-banner.jpg') no-repeat;
+  background-size: cover;
+  height: 55vh;
+}
+
+.single-banner-details {
+  background-color: rgb( 0, 0, 0 );
+  opacity: 0.929;
+  width: 30%;
+  height: 57vh;
+  margin-left: 57%;
+  text-align: center;
+}
+
+.details-hero {
+  padding-top: 10%;
+  margin-top: 30px;;
+  font-size: 18px;
+  font-family: "Lato";
+  color: rgb( 223, 189, 40 );
+  line-height: 2.083;
+  text-align: center;
+}
+
+.single-banner-details p {
+  font-size: 14px;
+  font-family: "Montserrat";
+  color: rgb( 225, 225, 225 );
+  text-transform: uppercase;
+  line-height: 2.083;
+  text-align: center;
+}
+
+.single-trip-join {
+  margin-left: 20%;
+  padding: 2px;
+  border-radius: 18px;
+  background-color: rgb( 84, 60, 97 );
+  width: 60%;
+  text-align: center;
+  cursor: pointer;
+}
+
+.single-join-text {
+  padding: 5px;
+  font-size: 14px;
+  font-family: "Montserrat";
+  color: rgb( 242, 198, 5 );
+  font-weight: bold;
+  text-transform: uppercase;
+  line-height: 3;
+  text-align: center;
+}
+
+.single-time {
+  margin-top: 25%;
+  font-size: 18px;
+  font-family: "Montserrat";
+  color: rgb( 223, 189, 40 );
+  line-height: 2.083;
+  text-align: center;
+}
+
+/* SECTION TABS*/
+
+.tabs {
+  margin-top: 5%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+
+.tabs label {
+  -webkit-box-ordinal-group: 2;
+  -webkit-order: 1;
+  -ms-flex-order: 1;
+  order: 1;
+  display: block;
+  padding: 1rem 2rem;
+  margin-right: 0.2rem;
+  cursor: pointer;
+  background: #fafafa;
+  font-weight: bold;
+  -webkit-transition: background ease 0.2s;
+  transition: background ease 0.2s;
+}
+
+.tabs .tab {
+  -webkit-box-ordinal-group: 100;
+  -webkit-order: 99;
+  -ms-flex-order: 99;
+  order: 99;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  width: 100%;
+  display: none;
+  padding: 1rem;
+  background: #fafafa;
+}
+
+.tabs input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+}
+
+.tabs input[type="radio"]:checked + label {
+  border-top: 5px solid rgb( 223, 189, 40 );
+
+}
+
+.tabs input[type="radio"]:checked + label + .tab {
+  display: block;
+}
+
+
+/*PEOPLE GOING RIGHT PANE*/
+
+.people-going {
+  position: relative;
+  margin-top: 11%;
+  background: #fafafa;
+  height: 30%;
+  text-align: center;
+  padding: 2%;
+}
+
+.going-text {
+  margin-top: 10%;
+  margin-bottom: 10%;
+}
+
+
+
+/*Madia Query for mobile*/
+
+@media (max-width: 45em) {
+
+.tabs .tab,  .tabs label {
+  -webkit-box-ordinal-group: NaN;
+  -webkit-order: initial;
+  -ms-flex-order: initial;
+  order: initial;
+}
+
+.tabs label {
+  width: 100%;
+  margin-right: 0;
+  margin-top: 0.2rem;
+}
+
+.single-trip-banner {
+  margin-top: 3%;
+  width: 100%;
+}
+
+.single-banner-details {
+  background-color: rgb( 0, 0, 0 );
+  opacity: 0.85;
+  width: 100%;
+  margin-left: 0;
+}
+
+.single-trip-save {
+    margin-left: 10%;
+    margin-bottom: 3%;
+    text-align: center;
+    border-radius: 15px;
+    background-color: rgb( 223, 189, 40 );
+    width: 80%;
+    height: 50%;
+    color: #fff;
+    float: left;
+}
+
+.single-trip-share {
+    margin-left: 10%;
+    text-align: center;
+    border-radius: 15px;
+    background-color: rgb( 223, 189, 40 );
+    width: 80%;
+    height: 50%;
+    color: #fff;
+    float: left;
+}
+
+
+}

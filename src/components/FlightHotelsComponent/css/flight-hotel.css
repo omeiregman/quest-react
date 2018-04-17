@@ -1,0 +1,43 @@
+
+
+ul.header li {
+  display: inline;
+  list-style-type: none;
+  margin: 0;
+}
+ul.header {
+  background-color: #f4f4f4;
+  padding: 0;
+}
+ul.header li a {
+  color: rgb( 168, 0, 230 );
+  font-size: 1.15em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 15px;
+  display: inline-block;
+}
+.content {
+  background-color: #f4f4f4;
+  padding: 20px;
+  height: 200px;
+  color: rgb( 168, 0, 230 );
+}
+.content h2 {
+  text-transform: uppercase;
+  font-size: 1.15em;
+  padding: 0;
+  margin: 0;
+}
+.content li {
+  margin-bottom: 10px;
+}
+
+.active {
+  background-color: rgb(255, 208, 0);
+}
+
+/*
+rgb( 168, 0, 230 )
+rgb(255, 208, 0);
+*/

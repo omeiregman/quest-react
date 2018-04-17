@@ -13,6 +13,11 @@ body{
     background-color: #543c61 !important;
 }
 
+.container {
+  padding-left: 10% !important;
+  padding-right: 10% !important;
+}
+
 /*
  * Remove text-shadow in selection highlight:
  * https://twitter.com/miketaylr/status/12228805301
