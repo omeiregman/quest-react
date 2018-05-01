@@ -5,9 +5,6 @@ import Hotel from "./Hotel";
 import Packages from "./Packages";
 
 
-
-
-
 class FlightHotelTab extends Component {
   render() {
     return (
@@ -26,7 +23,6 @@ class FlightHotelTab extends Component {
           </div>
         </div>
       </BrowserRouter>
-
     );
   }
 }

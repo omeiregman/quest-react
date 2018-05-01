@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import TripList from './TripList';
-//import { Route, Link } from 'react-router-dom';
+import { Link, } from 'react-router-dom';
 
 class TripDashboard extends Component {
   render() {
@@ -11,7 +11,7 @@ class TripDashboard extends Component {
         <h2 className="section-tag">Local trips</h2>
           <div className="">
             <div className="">
-              <TripList/>
+              <Link to='/questtrip'><TripList/></Link>
             </div>
           </div>
         <h2 className="section-tag">International trips</h2>

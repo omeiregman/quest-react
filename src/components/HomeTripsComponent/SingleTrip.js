@@ -42,7 +42,7 @@ class SingleTrip extends Component {
                     PRICE: <span>N789,450</span>
                 </p>
                 <div className="single-trip-join">
-                    <span><img src="img/join-icon-yellow.png" width="25" height="25"/></span>
+                    <span><img src="img/join-icon-yellow.png" width="25" height="25" alt="join trip"/></span>
                     <span className="single-join-text">JOIN TRIP</span>
                 </div>
                 <span className="single-time">
@@ -104,11 +104,10 @@ class SingleTrip extends Component {
                 <a>Find out who is going</a>
               </p>
               <div className="single-trip-join">
-                  <span><img src="img/join-icon-yellow.png" width="25" height="25"/></span>
+                  <span><img src="img/join-icon-yellow.png" width="25" height="25" alt="Join img"/></span>
                   <span className="single-join-text">JOIN TRIP</span>
               </div>
             </div>
-
         </div>
         </div>
     </section>

@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
-import HomeScreenComponent from './components/HomeScreenComponent';
+import Nav from './components/NavigationComponent/Nav';
+import Root from './components/Root';
+
+
 
 class App extends Component {
   render() {
     return (
       <div>
-        <HomeScreenComponent />
+        <Nav/>
+        <Root/>
       </div>
     );
   }

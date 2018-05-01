@@ -7,16 +7,16 @@ html {
     color: #222;
     font-size: 1em;
     line-height: 1.4;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Montserrat', sans-serif !important;
 }
 body{
     background-color: #543c61 !important;
 }
 
-.container {
-  padding-left: 10% !important;
-  padding-right: 10% !important;
-}
+/* .container {
+  padding-left: 8% !important;
+  padding-right: 8% !important;
+} */
 
 /*
  * Remove text-shadow in selection highlight:

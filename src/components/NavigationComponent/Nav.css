@@ -1,0 +1,55 @@
+/*MAVIGATION BAR*/
+Link{
+  text-decoration: none;
+}
+.main-nav {
+  border-radius: 7px;
+  background-color: #333333 !important;
+  margin-top: 20px;
+}
+
+.nav-items{
+  margin-left: 35%;
+  font-size: 0.857em;
+  font-family: 'Montserrat', sans-serif;
+  text-transform: uppercase;
+  color: #fff !important;
+  line-height: 1.714;
+}
+
+.nav-item {
+  color: #fff !important;
+  line-height: 1.714;
+}
+
+.nav-logo {
+  left: 57px;
+  width: 40px;
+  height: 40px;
+}
+
+.nav-quest {
+  font-size: 18px;
+  color: rgb(255, 208, 0);
+  font-weight: bold;
+  text-transform: uppercase;
+  text-decoration: none !important;
+  line-height: 1.333;
+  padding: 15px;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.nav-quest:hover {
+  font-size: 18px;
+  color: rgb( 255, 208, 0 ) !important;
+  font-weight: bold;
+  text-transform: uppercase;
+  line-height: 1.333;
+  text-decoration: none;
+}
+
+.nav-login {
+  font-size: 18px;
+  color: rgb(255, 255, 255);
+  padding-left: 5px;
+}

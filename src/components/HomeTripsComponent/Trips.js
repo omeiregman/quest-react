@@ -6,11 +6,11 @@ constructor (props) {
   super(props);
 
 
-//  this.handleTripClick = this.handleTripClick.bind(this);
+ this.handleTripClick = this.handleTripClick.bind(this);
 }
-  // handleTripClick() {
-  //   this.props.onTripClick(this.props.id);
-  // }
+  handleTripClick() {
+    this.props.onTripClick(this.props.id);
+  }
 
   render() {
     return (
