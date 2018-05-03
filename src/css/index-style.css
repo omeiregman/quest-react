@@ -1,3 +1,14 @@
+a:hover {
+  text-decoration: none !important;
+}
+
+a {
+  text-decoration: none;
+}
+
+
+
+
 
 /**BANNER*/
 .banner-head {
@@ -134,6 +145,10 @@
 margin-top: 5%;
 display: inline-block;
 margin-right: 5%;
+}
+
+.small-trips img {
+  width: 100%;
 }
 
 .small-trips-single {

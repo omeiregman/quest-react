@@ -98,8 +98,13 @@ textarea {
 /* ==========================================================================
    Author's custom styles
    ========================================================================== */
+a:hover {
+  text-decoration: none;
+}
 
-
+a {
+  text-decoration: none;
+}
 
 
 
@@ -235,7 +240,7 @@ textarea {
 
     a,
     a:visited {
-        text-decoration: underline;
+        text-decoration: none;
     }
 
     a[href]:after {

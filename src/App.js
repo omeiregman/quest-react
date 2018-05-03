@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Nav from './components/NavigationComponent/Nav';
 import Root from './components/Root';
-
+import Footer from './components/Footer';
 
 
 class App extends Component {
@@ -10,6 +10,7 @@ class App extends Component {
       <div>
         <Nav/>
         <Root/>
+        <Footer/>
       </div>
     );
   }
