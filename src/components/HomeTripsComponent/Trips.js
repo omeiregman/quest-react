@@ -7,7 +7,7 @@ class Trips extends Component {
   render() {
     return (
 
-        <div className="">
+        <div className="col-md-3">
           <Link to={`/questtrip/${this.props.destination}`} key={this.props.destination}><div className="card small-trips">
             <img src={require(`${this.props.image}`)} alt="Trips Avatar" />
             <div className="container">

@@ -19,7 +19,7 @@ class TripList extends Component {
   ));
     return (
         <div className="">
-          <div className="col-md-3">
+          <div className="row">
             {tripComponent}
           </div>
         </div>
