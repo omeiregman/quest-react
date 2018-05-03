@@ -25,8 +25,8 @@ class Nav extends Component {
                       <Link to="/about" className="nav-item nav-link">ABOUT</Link>
                       <Link to="/createtrip" className="nav-item nav-link">CREATE TRIPS</Link>
                       <Link to="/getapp" className="nav-item nav-link">GET APP</Link>
-                      <a className="nav-item nav-link" href="#">LOGIN</a>
-                      <a className="nav-item nav-link" href="#">SIGN UP</a>
+                      <Link to='/' className="nav-item nav-link">LOGIN</Link>
+                      <Link to="/" className="nav-item nav-link">SIGN UP</Link>
 
                       {/* <!-- <span><img src="img/login-icon.png" alt="login"/></span>--> */}
                   </div>

@@ -1,17 +1,11 @@
 import React from "react";
 import { Redirect } from 'react-router-dom';
-import './css/singletrip.css';
-import Trip from './trip-data.json';
-
-import img_join_yellow from './img/join-icon-yellow.png';
-import img_going from './img/going-avatar.png';
-import img_share from './img/share-icon.png';
-import img_save from './img/save-icon.png';
-import img_join_purple from './img/join-icon-purple.png';
+import Trip from './HomeTripsComponent/trip-data.json';
 
 class SingleTry extends React.Component {
   constructor(props){
     super(props);
+
 
     this.state={
       selectedTrip:{},
@@ -23,20 +17,20 @@ class SingleTry extends React.Component {
   }
 
 render() {
-  const tripId = this.props.match.params.name;
-    if (tripId !== "" && !tripId) {
+  const tripId = parseInt(this.props.match.params.id, 10);
+    if (tripId !== 0 && !tripId) {
       return(
         <Redirect to={{ pathname: "/404" }} />
       );
     } else {
-      const getTrip = (destination) => {
-        const isTrip = t => t.destination === tripId
+      const getTrip = (id) => {
+        const isTrip = t => t.id === id
         return Trip.intlTrips.find(isTrip)
       }
 
 
 
-      console.log(getTrip(tripId));
+      //console.log(this.state.selectedTrip);
       const selectedTrip = getTrip(tripId);
       return(
           <section>
@@ -44,21 +38,21 @@ render() {
               <div className="single-trips-header">
                 <div className="row">
                     <div className="col-md-6">
-                        { <h3>{selectedTrip.destination}</h3> }
+                        <h3>{selectedTrip.destination}</h3>
                     </div>
                     <div className="col-md-6">
-                        <span>
+                        {/* <span>
                   <div className="single-trip-save">
-                  <span><img src={img_save} width="25" height="25" alt="Save trip"/></span>
+                  <span><img src="img/new/save-icon.png" width="25" height="25"/></span>
                         <span className="single-save-text">SAVE TO MY TRIPS</span>
                     </div>
                     </span>
                     <span><a href="#">
                 <div className="single-trip-share">
-                  <span><img src={img_share} width="25" height="25" alt="Share trip"/></span>
+                  <span><img src="img/new/share-icon.png" width="25" height="25"/></span>
                     <span className="single-save-text">SHARE</span>
                 </div></a>
-                </span>
+                </span> */}
             </div>
             </div>
             </div>
@@ -69,13 +63,13 @@ render() {
                         "A Central and Stylish Place in Finland"
                     </span>
                     <p>
-                        {selectedTrip.departure_date}
+                        {/* {selectedTrip.departure_date} */}
                     </p>
                     <p>
-                        PRICE: <span>{selectedTrip.package_price}</span>
+                        {/* PRICE: <span>{selectedTrip.package_price}</span> */}
                     </p>
                     <div className="single-trip-join">
-                        <span><img src={img_join_yellow} width="25" height="25" alt="join trip"/></span>
+                        <span><img src="img/join-icon-yellow.png" width="25" height="25" alt="join trip"/></span>
                         <span className="single-join-text">JOIN TRIP</span>
                     </div>
                     <span className="single-time">
@@ -131,13 +125,13 @@ render() {
                 </div>
 
                 <div className="col-md-4 people-going">
-                  <img src={img_going} alt="going-img"/>
+                  <img src="img/new/going-avatar.png" alt="going-img"/>
                   <p className="going-text">
                     <a>27 People Going</a> <br />
                     <a>Find out who is going</a>
                   </p>
                   <div className="single-trip-join">
-                      <span><img src={img_join_yellow} width="25" height="25" alt="Join img"/></span>
+                      <span><img src="img/join-icon-yellow.png" width="25" height="25" alt="Join img"/></span>
                       <span className="single-join-text">JOIN TRIP</span>
                   </div>
                 </div>

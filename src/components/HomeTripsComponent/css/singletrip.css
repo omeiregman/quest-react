@@ -19,7 +19,7 @@
     border-radius: 15px;
     background-color: rgb( 223, 189, 40 );
     width: 35%;
-    height: 50%;
+    height: 100%;
     color: #fff;
     float: left;
     cursor: pointer;
@@ -31,7 +31,7 @@
     border-radius: 15px;
     background-color: rgb( 223, 189, 40 );
     width: 25%;
-    height: 50%;
+    height: 100%;
     color: #fff;
     float: left;
     cursor: pointer;
