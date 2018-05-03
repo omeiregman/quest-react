@@ -9,7 +9,7 @@ Link{
 }
 
 .nav-items{
-  margin-left: 35%;
+  margin-left: 40%;
   font-size: 0.857em;
   font-family: 'Montserrat', sans-serif;
   text-transform: uppercase;
@@ -18,6 +18,7 @@ Link{
 }
 
 .nav-item {
+  margin-left: 25px;
   color: #fff !important;
   line-height: 1.714;
 }
