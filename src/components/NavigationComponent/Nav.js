@@ -5,6 +5,8 @@ import './Nav.css';
 
 
 class Nav extends Component {
+
+
   render () {
     return(
 
@@ -25,8 +27,8 @@ class Nav extends Component {
                       <Link to="/about" className="nav-item nav-link">ABOUT</Link>
                       <Link to="/createtrip" className="nav-item nav-link">CREATE TRIPS</Link>
                       <Link to="/getapp" className="nav-item nav-link">GET APP</Link>
-                      <Link to='/' className="nav-item nav-link">LOGIN</Link>
-                      <Link to="/" className="nav-item nav-link">SIGN UP</Link>
+                      <Link to='/login' className="nav-item nav-link">LOGIN</Link>
+                      <Link to="/register" className="nav-item nav-link">SIGN UP</Link>
 
                       {/* <!-- <span><img src="img/login-icon.png" alt="login"/></span>--> */}
                   </div>

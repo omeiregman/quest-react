@@ -8,6 +8,8 @@ import Home from './HomeScreen';
 import SingleTrip from './HomeTripsComponent/SingleTrip';
 import PageNotFound from './pagenotfound';
 import SingleTry from './singletry';
+import Login from './Auth/Login';
+import SignUp from './Auth/SignUp';
 
 const Root = () => {
 
@@ -19,6 +21,8 @@ const Root = () => {
       <Route path="/about" component={About}/>
       <Route path="/createtrip" component={CreateTrip}/>
       <Route path="/getapp" component={GetApp}/>
+      <Route path="/login" component={Login}/>
+      <Route path='/register' component={SignUp}/>
       <Route path="/404" component={PageNotFound}/>
       <Route path="/singletry/:id" render={props => <SingleTry {...props} />}/>
       </Switch>
