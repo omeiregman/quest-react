@@ -1,0 +1,152 @@
+.confirm-pay-container {
+  margin-top: 5%;
+
+  border-radius: 10px;
+  background-color: rgb( 227, 219, 232 );
+  padding: 30px;
+  width: 100%;
+}
+
+.confirm-pay-container p {
+  display: inline-block;
+  width: 100%;
+}
+
+
+/* Every row inside .login-container is defined with p tags */
+.confirm-pay {
+  padding: 20px;
+
+}
+
+.confirm-pay span {
+  margin-left: 5%;
+}
+
+.confirm-pay input {
+  margin-left: 5%;
+  box-sizing: border-box;
+  display: block;
+  width:90%;
+  border-width: 1px;
+  border-style: solid;
+  padding: 16px;
+  outline: 0;
+  font-family: inherit;
+  font-size: 0.95em;
+}
+
+.confirm-pay input[type="email"],
+.confirm-pay input[type="password"],
+.confirm-pay input[type="text"] {
+  background: #fff;
+  border-color: #bbb;
+  color: #555;
+}
+
+/* Text fields' focus effect */
+.confirm-pay input[type="email"]:focus,
+.confirm-pay input[type="password"]:focus,
+.confirm-pay input[type="text"]:focus {
+  border-color: #888;
+}
+
+.confirm-pay input[type="submit"] {
+  text-align: center;
+  width: 75%;
+  border-radius: 15px;
+  background-color: rgb( 168, 0, 230 );
+  border-color: transparent;
+  color: #fff;
+  cursor: pointer;
+}
+
+.confirm-pay input[type="submit"]:hover {
+  border-radius: 18px;
+  background-color: rgb( 168, 100, 230 );
+}
+
+/* Buttons' focus effect */
+.confirm-pay input[type="submit"]:focus {
+  border-radius: 18px;
+  background-color: rgb( 168, 0, 230 );
+}
+
+.payment-card {
+  margin-left: 5%;
+  margin-top: 5%;
+  background-color: #fff;
+  width: 90%;
+  max-height: 100%;
+  border-radius: 8px;
+  border: solid 2px rgb(254, 217, 106);
+  font-family: 'Montserrat';
+  font-size: 0.875em;
+}
+
+.payment-card-top-master {
+  background-color: rgb(112, 193, 237);
+  height: 30%;
+  font-size: 18px;
+  font-family: "Lato";
+  color: rgb( 255, 255, 255 );
+  text-transform: uppercase;
+}
+
+.payment-card-top-master p {
+ margin-left: 5%;
+ padding-top: 1%;
+}
+
+.payment-card-body {
+  padding: 5%;
+}
+
+.pay-confirm-hidden {
+
+}
+
+ .payment-section {
+   margin-top: 5%;
+   background-color: #d1cad6;
+   border-radius: 10px;
+ }
+
+ .pay-hero {
+   padding-top: 5%;
+   text-align: center;
+   color: rgb( 239, 230, 230 );
+ }
+
+ .payment-card-top-visa {
+   background-color: rgb(69, 72, 180);
+   height: 30%;
+   font-size: 18px;
+   font-family: "Lato";
+   color: rgb( 255, 255, 255 );
+   text-transform: uppercase;
+ }
+
+ .payment-card-top-visa p {
+  margin-left: 5%;
+  padding-top: 1%;
+ }
+
+ .payment-card-body-visa {
+   padding: 5%;
+ }
+
+.pay-btn {
+  text-align: center;
+  border: solid 2px rgb(242, 143, 70);
+  width: 25%;
+  margin-left: 37%;
+  margin-top: 7%;
+  margin-bottom: 4%;
+}
+
+.manage-cards {
+  text-align: center;
+  margin-left: 34%;
+  font-weight: bold;
+}

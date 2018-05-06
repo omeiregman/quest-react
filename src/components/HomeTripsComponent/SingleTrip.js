@@ -1,5 +1,5 @@
-import React from "react";
-import { Redirect } from 'react-router-dom';
+import React, { Component } from "react";
+import { Redirect, Link } from 'react-router-dom';
 import './css/singletrip.css';
 import Trip from './trip-data.json';
 
@@ -7,19 +7,39 @@ import img_join_yellow from './img/join-icon-yellow.png';
 import img_going from './img/going-avatar.png';
 import img_share from './img/share-icon.png';
 import img_save from './img/save-icon.png';
-import img_join_purple from './img/join-icon-purple.png';
+//import img_join_purple from './img/join-icon-purple.png';
 
-class SingleTry extends React.Component {
+class SingleTrip extends Component {
   constructor(props){
     super(props);
 
-    this.state={
-      selectedTrip:{},
-    }
+
+
+    //this.populateTripData = this.populateTripData.bind(this);
   }
 
   componentDidMount() {
     window.scrollTo(0,0);
+    //populateTripData();
+  }
+
+//   populateTripData = () => {
+//     const newTripId = this.state.selectedTrip;
+//     if (newTripId !== "" && !newTripId) {
+//       return(
+//         <Redirect to={{ pathname: "/404" }} />
+//       );
+//     } else {
+//       const getTrip = (destination) => {
+//         const isTrip = t => t.destination === tripId
+//         return Trip.intlTrips.find(isTrip)
+//     }
+//     const selectedTrip = getTrip(newTripId);
+//   }
+// }
+
+  componentWillMount() {
+
   }
 
 render() {
@@ -32,19 +52,17 @@ render() {
       const getTrip = (destination) => {
         const isTrip = t => t.destination === tripId
         return Trip.intlTrips.find(isTrip)
+
       }
-
-
-
       console.log(getTrip(tripId));
-      const selectedTrip = getTrip(tripId);
+     const selectedTrip = getTrip(tripId);
       return(
           <section>
             <div className="container">
               <div className="single-trips-header">
                 <div className="row">
                     <div className="col-md-6">
-                        { <h3>{selectedTrip.destination}</h3> }
+                        <h3>{selectedTrip.destination}</h3>
                     </div>
                     <div className="col-md-6">
                         <span>
@@ -53,7 +71,7 @@ render() {
                         <span className="single-save-text">SAVE TO MY TRIPS</span>
                     </div>
                     </span>
-                    <span><a href="#">
+                    <span><a href="./">
                 <div className="single-trip-share">
                   <span><img src={img_share} width="25" height="25" alt="Share trip"/></span>
                     <span className="single-save-text">SHARE</span>
@@ -76,7 +94,7 @@ render() {
                     </p>
                     <div className="single-trip-join">
                         <span><img src={img_join_yellow} width="25" height="25" alt="join trip"/></span>
-                        <span className="single-join-text">JOIN TRIP</span>
+                      <span className="single-join-text"><Link to={`/questtrip/payment/${selectedTrip.destination}`}>JOIN TRIP</Link></span>
                     </div>
                     <span className="single-time">
                         Time Remaining: <br /> <span>21 days, 21:05:33</span>
@@ -150,4 +168,4 @@ render() {
 }
 }
 
-export default SingleTry;
+export default SingleTrip;
