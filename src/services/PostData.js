@@ -1,9 +1,9 @@
-import axios from 'axios';
+//import axios from 'axios';
 
 export function PostData(type, userData) {
 
- //let BaseUrl = 'http://rocky-tor-99302.herokuapp.com/api/auth/';
- let BaseUrl = 'https://api.thewallscript.com/restful/';
+ let BaseUrl = 'http://rocky-tor-99302.herokuapp.com/api/auth/';
+ //let BaseUrl = 'https://api.thewallscript.com/restful/';
 
   // axios.post(BaseUrl+type, userData
   //   , {
@@ -28,7 +28,7 @@ export function PostData(type, userData) {
       fetch(BaseUrl+type,{
         method: 'POST',
         headers: {
-           // 'Content-type' : 'application/json'
+           'Content-type' : 'application/json'
         },
         body: JSON.stringify(userData)
       })

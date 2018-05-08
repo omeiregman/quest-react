@@ -1,13 +1,47 @@
 import React, { Component } from 'react';
 import img_icon from './img/icon.png';
-import {  Link } from 'react-router-dom';
+import {  Link, Redirect } from 'react-router-dom';
 import './Nav.css';
-
+import img_login from './img/login-icon.png';
 
 class Nav extends Component {
+  constructor(props){
+    super(props);
 
+    this.state={
+      signedIn:false,
+    }
+
+    this.signOut = this.signOut.bind(this);
+  }
+
+componentWillMount() {
+  if(sessionStorage.getItem('userData')){
+    this.setState({ signedIn: true })
+  }
+}
+
+componentDidMount () {
+  if(sessionStorage.getItem('userData')){
+    this.setState({ signedIn: true })
+  }
+  //  else {
+  //   this.setState({ signedIn: false })
+  // }
+  console.log(this.state)
+}
+
+signOut(){
+  sessionStorage.setItem('userData', '');
+  sessionStorage.clear();
+  this.setState({ signedIn: false });
+  console.log(this.state);
+  // return(<Redirect to='/' />)
+}
 
   render () {
+    const isSignedIn = this.state.signedIn;
+    console.log(isSignedIn);
     return(
 
       <div className="container">
@@ -27,10 +61,29 @@ class Nav extends Component {
                       <Link to="/about" className="nav-item nav-link">ABOUT</Link>
                       <Link to="/createtrip" className="nav-item nav-link">CREATE TRIPS</Link>
                       <Link to="/getapp" className="nav-item nav-link">GET APP</Link>
-                      <Link to='/signin' className="nav-item nav-link">SIGN IN</Link>
-                      <Link to="/signup" className="nav-item nav-link">SIGN UP</Link>
+                      {isSignedIn ? (
+                        <div>
+                          <span><Link className="nav-item nav-link" to='/signin'><img src={img_login} width="25" height="25"/></Link></span>
+                          <Link to='/' className="nav-item nav-link" onClick={this.signOut}>SIGN OUT</Link>
+                        </div>
+                        ) : (
+                          <div>
+                            <Link className="nav-item nav-link" to='/signin'><span> SIGNIN</span></Link>
+                            <Link to="/signup" className="nav-item nav-link">SIGN UP</Link>
+                          </div>
+                        )}
 
-                      {/* <!-- <span><img src="img/login-icon.png" alt="login"/></span>--> */}
+                      {/* {(this.state.signedIn===false) && (
+                        <div>
+                          <Link className="nav-item nav-link" to='/signin'><span> SIGNIN</span></Link>
+                          <Link to="/signup" className="nav-item nav-link">SIGN UP</Link>
+                        </div>)}{
+                        (this.state.signedIn===true) && (
+                          <div>
+                            <span><Link className="nav-item nav-link" to='/signin'><img src={img_login} width="25" height="25"/></Link></span>
+                            <Link to='/' className="nav-item nav-link" onClick={this.signOut}>SIGN OUT</Link>
+                          </div>)
+                        } */}
                   </div>
               </div>
 

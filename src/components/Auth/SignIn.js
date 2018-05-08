@@ -11,7 +11,7 @@ class SignIn extends Component {
     super(props);
 
     this.state = {
-      username:'',
+      email:'',
       password:'',
       redirect: false
     }
@@ -30,14 +30,14 @@ class SignIn extends Component {
   signin = (e) => {
     e.preventDefault();
     console.log("clicked signin");
-    if(this.state.username && this.state.password){
-      PostData('login', this.state);
+    if(this.state.email && this.state.password){
       PostData('login', this.state).then((result) => {
         let responseJSON = result;
-        if(responseJSON.userData){
+        if(responseJSON){
           sessionStorage.setItem('userData', responseJSON);
           this.setState({redirect: true});
-          console.log("Home Page");
+          console.log(sessionStorage);
+          console.log(this.state);
         } else {
           console.log("login error");
         }
@@ -50,9 +50,13 @@ class SignIn extends Component {
 
   render() {
 
-    // if(this.state.redirect) {
-    //   return(<Redirect to='/'/> )
-    // }
+    if(this.state.redirect) {
+      return(<Redirect to='/'/> )
+    }
+
+    if(sessionStorage.getItem('userData')) {
+      return(<Redirect to='/'/> )
+    }
     return (
       <section>
         <div className="container">
@@ -66,9 +70,9 @@ class SignIn extends Component {
                 <div className="col-md-8 login-right">
                     <div className="login">
                         <form className="login-container">
-                            <input type="email" name="username" placeholder="Email" onChange={this.onChange}/>
-                            <input type="password" name="password" placeholder="Password" onChange={this.onChange}/>
-                            <input type="submit" value="SIGN IN" onClick={this.signin}/>
+                            <p><input type="email" name="email" placeholder="Email" onChange={this.onChange}/></p>
+                            <p><input type="password" name="password" placeholder="Password" onChange={this.onChange}/></p>
+                            <p><input type="submit" value="SIGN IN" onClick={this.signin}/></p>
                             <p>New to Quest? <Link to="/signup">Create an Account</Link></p>
 
                           {/* <button className="loginBtn loginBtn--facebook">
