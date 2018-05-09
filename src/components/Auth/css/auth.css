@@ -4,7 +4,7 @@
 /*OVERALL SECTION*/
 .login-section {
   padding: 45px;
-  margin-left: 10%;
+  margin-left: 10% !important;
   margin-top: 5%;
   width: 75%;
   box-sizing: content-box !important;
@@ -12,7 +12,7 @@
 
 .signup-section {
   padding: 45px;
-  margin-left: 10%;
+  margin-left: 10% !important;
   margin-top: 1%;
   width: 75%;
   box-sizing: content-box !important;
@@ -114,6 +114,16 @@
 .login input[type=submit]:focus {
   border-radius: 18px;
   background-color: rgb( 168, 0, 230 );
+}
+
+
+
+.right {
+  border-color: green;
+}
+
+.wrong {
+  border-color: red;
 }
 
 

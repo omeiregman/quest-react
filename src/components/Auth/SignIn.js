@@ -13,7 +13,7 @@ class SignIn extends Component {
     this.state = {
       email:'',
       password:'',
-      redirect: false
+      isSignedIn: false
     }
 
     this.signin = this.signin.bind(this);
@@ -35,7 +35,7 @@ class SignIn extends Component {
         let responseJSON = result;
         if(responseJSON){
           sessionStorage.setItem('userData', responseJSON);
-          this.setState({redirect: true});
+          this.setState({isSignedIn: true});
           console.log(sessionStorage);
           console.log(this.state);
         } else {
@@ -50,7 +50,7 @@ class SignIn extends Component {
 
   render() {
 
-    if(this.state.redirect) {
+    if(this.state.isSignedIn) {
       return(<Redirect to='/'/> )
     }
 
@@ -75,13 +75,13 @@ class SignIn extends Component {
                             <p><input type="submit" value="SIGN IN" onClick={this.signin}/></p>
                             <p>New to Quest? <Link to="/signup">Create an Account</Link></p>
 
-                          {/* <button className="loginBtn loginBtn--facebook">
+                          <button className="loginBtn loginBtn--facebook">
                             Sign in with Facebook
                           </button>
                           <br />
                           <button className="loginBtn loginBtn--google">
                             Sign in with Google
-                          </button> */}
+                          </button>
                         </form>
                     </div>
                 </div>
