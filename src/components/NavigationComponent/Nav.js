@@ -24,6 +24,7 @@ componentWillMount() {
 componentDidMount () {
   if(sessionStorage.getItem('userData')){
     this.setState({ signedIn: true })
+    this.render();
   }
   //  else {
   //   this.setState({ signedIn: false })
@@ -36,12 +37,11 @@ signOut(){
   sessionStorage.clear();
   this.setState({ signedIn: false });
   console.log(this.state);
-  // return(<Redirect to='/' />)
+  return(<Redirect to='/' />)
 }
 
   render () {
     const isSignedIn = this.state.signedIn;
-    console.log(isSignedIn);
     return(
 
       <div className="container">
@@ -62,28 +62,16 @@ signOut(){
                       <Link to="/createtrip" className="nav-item nav-link">CREATE TRIPS</Link>
                       <Link to="/getapp" className="nav-item nav-link">GET APP</Link>
                       {isSignedIn ? (
-                        <div>
+                        <span className="nav-item nav-link nav-link-toggle">
                           <span><Link className="nav-item nav-link" to='/signin'><img src={img_login} width="25" height="25"/></Link></span>
                           <Link to='/' className="nav-item nav-link" onClick={this.signOut}>SIGN OUT</Link>
-                        </div>
+                        </span>
                         ) : (
-                          <div>
-                            <Link className="nav-item nav-link" to='/signin'><span> SIGNIN</span></Link>
+                          <span className="nav-item nav-link nav-link-toggle">
+                            <Link className="nav-item nav-link" to='/signin'><span> SIGN IN</span></Link>
                             <Link to="/signup" className="nav-item nav-link">SIGN UP</Link>
-                          </div>
+                          </span>
                         )}
-
-                      {/* {(this.state.signedIn===false) && (
-                        <div>
-                          <Link className="nav-item nav-link" to='/signin'><span> SIGNIN</span></Link>
-                          <Link to="/signup" className="nav-item nav-link">SIGN UP</Link>
-                        </div>)}{
-                        (this.state.signedIn===true) && (
-                          <div>
-                            <span><Link className="nav-item nav-link" to='/signin'><img src={img_login} width="25" height="25"/></Link></span>
-                            <Link to='/' className="nav-item nav-link" onClick={this.signOut}>SIGN OUT</Link>
-                          </div>)
-                        } */}
                   </div>
               </div>
 
