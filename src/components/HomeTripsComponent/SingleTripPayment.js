@@ -33,6 +33,7 @@ class SingleTripPayment extends Component {
       //Bind event to 'this'
       this.handleChange = this.handleChange.bind(this);
       this.enablePayment = this.enablePayment.bind(this);
+      this.onClickPay = this.onClickPay.bind(this);
   }
 
 
@@ -72,6 +73,10 @@ class SingleTripPayment extends Component {
     else {
       this.setState({ disabled: true });
     }
+  }
+
+  onClickPay = (e) => {
+    e.preventDefault();
   }
 
   componentWillMount() {
@@ -130,7 +135,7 @@ class SingleTripPayment extends Component {
                  <p><span>Last Name</span> <br /><input type="text" placeholder="" name="lastname" value={this.state.lastname} onChange={this.handleChange} /></p>
                  <p><span>Passport Number</span> <br /><input type="text" placeholder="" name="passportNumber" value={this.state.passportNumber} onChange={this.handleChange} /></p>
                  <p><span>Phone Number</span> <br /><input type="text" placeholder="" name="phone" value={this.state.phone} onChange={this.handleChange} /></p>
-                 <div className="">
+                 <div className="" onClick={this.onClickPay}>
                    <PaystackButton
                       text="PAY NOW"
                       class="pay-btn"
