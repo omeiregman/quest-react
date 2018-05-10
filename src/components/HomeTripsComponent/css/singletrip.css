@@ -5,7 +5,7 @@
   margin-bottom: 2%;
 }
 
-.single-trips-header h3 {
+.single-trips-header h3, h4 {
   font-size: 28px;
   font-family: "Lato";
   color: rgb( 243, 235, 233 );

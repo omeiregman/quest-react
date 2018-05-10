@@ -16,7 +16,6 @@
 /* Every row inside .login-container is defined with p tags */
 .confirm-pay {
   padding: 20px;
-
 }
 
 .confirm-pay span {
@@ -53,7 +52,7 @@
 
 .confirm-pay input[type="submit"] {
   text-align: center;
-  width: 75%;
+  width: 90%;
   border-radius: 15px;
   background-color: rgb( 168, 0, 230 );
   border-color: transparent;
@@ -71,6 +70,7 @@
   border-radius: 18px;
   background-color: rgb( 168, 0, 230 );
 }
+
 
 .payment-card {
   margin-left: 5%;
@@ -107,7 +107,8 @@
 }
 
  .payment-section {
-   margin-top: 5%;
+   margin-top: 11%;
+   padding: 20px;
    background-color: #d1cad6;
    border-radius: 10px;
  }
@@ -139,10 +140,11 @@
 .pay-btn {
   text-align: center;
   border: solid 2px rgb(242, 143, 70);
-  width: 25%;
-  margin-left: 37%;
+  width: 40%;
+  margin-left: 30%;
   margin-top: 7%;
   margin-bottom: 4%;
+  cursor: pointer;
 }
 
 .manage-cards {

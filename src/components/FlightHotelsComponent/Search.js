@@ -1,89 +1,89 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import Flightresult from './result.js';
+import { Async } from 'react-select';
+import Select from 'react-select';
+import 'react-select/dist/react-select.css';
 
 
-//const API_URL = 'http://139.162.210.123:8086/v1/flight/get-city-airports'
-const API_URL = 'http://rocky-tor-99302.herokuapp.com/api/flight/get-cities';
+const API_URL = 'http://rocky-tor-99302.herokuapp.com/api/flight/n_airports/search/';
 
 class Search extends Component {
   state = {
     query: '',
-    results: []
+    results: [],
+    from:'',
+    to:'',
+    tripType:0,
+    ticketClass:0,
+    travellerDetail: {
+      adult: 0,
+      children: 0,
+      infant: 0
+    },
+    flightItenaryDetail: [
+      {
+        originAirportCoode:'',
+        destinationAirportCode:'',
+        departureDate:'',
+        originAirportCoodeTwo:'',
+        destinationAirportCodeTwo:'',
+        departureDateTwo:''
+      }
+    ]
   }
 
-
-  getCity = () => {
-    let cityData = JSON.stringify({
-          countryCode: "NG",
-  })
-    axios.post(API_URL, cityData, {headers: {'Content-type':"application/json"}}
-      // cityData, {
-      // headers:{
-      //   'Authorization': "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI3NjE1MzA2IiwiaXNzIjoiMTk3LjIxMS42MC40NCIsImV4cCI6MTUyNTQ3OTA1NSwiaWF0IjoxNTI1NDU3NDU1fQ.h773_8Do8AZxblhTyopelRpzRRJPCqStSuntSKDOBR0",
-      //   'Content-type': "application/json"
-      // }
-  )
-  .then(function (response) {
-    console.log(response);
-  })
-  .catch(function (error) {
-    console.log(error);
-  });
-  }
-
-  // getInfo = () => {
-  //   axios.get(`${API_URL}?code=${this.state.query}`)
+  // getOptions = (input) => {
+  //   axios.get(API_URL+input)
   //   .then(({ data }) => {
-  //     this.setState({
-  //       results: data.data
-  //     })
+  //     return { options: data.search_api }
   //   })
   // }
 
-  getData = () => {
-    this.setState({
-      results: Flightresult.data,
-    })
-  }
-
-    handleInputChange = () => {
-      this.setState({
-        query: this.search.value
-      }, () => {
-        if (this.state.query && this.state.query.length > 1) {
-          if (this.state.query.length % 2 === 0) {
-            //this.getData();
-            //this.getInfo()
-          }
-        }
-      })
-    }
+  getOptions = (input) => {
+  return fetch(`${API_URL}${input}`)
+    .then((response) => {
+      console.log(response);
+      console.log(response.search_api)
+      return response.search_api();
+    }).then((search_api) => {
+      console.log(search_api)
+      return { options: search_api };
+    });
+}
 
 
-
+    // handleInputChange = () => {
+    //   this.setState({
+    //     query: this.search.value
+    //   }, () => {
+    //     if (this.state.query && this.state.query.length > 1) {
+    //       if (this.state.query.length > 0) {
+    //         this.getInfo();
+    //       }
+    //     }
+    //   })
+    // }
 
     componentDidMount() {
-      //this.getCity();
+
     }
 
     render() {
-      const options = this.state.results.map(r => (
-        <li key={r.id}>
-          {r.displayValue}
-        </li>
-      ), 5);
+      // const options = this.state.results.map(r => (
+      //   <options key={r.name}
+      //     value={`${r.cityName}, ${r.cityCode}`}>
+      //   </options>
+      // ), 5);
       return(
-        <form>
-          <input
-            placeholder="Going to"
-            ref={input => this.search = input}
-            onChange={this.handleInputChange}
-          />
-          <p>{options}</p>
-        </form>
-
-      )
+        <Async
+          name="From"
+          value="select"
+          label="Travelling From"
+          loadOptions={this.getOptions}
+          autoLoad={false}
+          loadingPlaceholder="Loading Airports"
+        />
+      );
     }
 }
 

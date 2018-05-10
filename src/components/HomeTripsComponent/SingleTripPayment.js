@@ -31,68 +31,68 @@ class SingleTripPayment extends Component {
        const selectedTrip = getTrip(tripId);
 
     return(
-      <section>
+    <section>
      <div className="container">
        <div className="single-trips-header">
          <div className="row">
-             <div className="col-md-6">
-                 <h3>{selectedTrip.destination}</h3>
+             <div className="col-sm-6">
+                 <h3>Destination: {selectedTrip.destination}</h3>
+                 <h4>Total Sum: <span>N{selectedTrip.package_price}</span></h4>
              </div>
-             <div className="col-md-6">
-          </div>
+             <div className="col-sm-6">
+             </div>
      </div>
      </div>
 
      {/* <!--CONFIRM AND PAY SECTION--> */}
 
      <div className="container">
-       <h3 className="section-tag">Confirm your details</h3>
+       <div className="row">
+         <div className="col-lg-6">
+       <h3 className="section-tag">Confirm your Personal details</h3>
        <div className="row confirm-pay">
-
          <form className="confirm-pay-container">
-             <p><span>First Name</span> <br /><input type="text" placeholder="" name="confirm-firstname"/></p>
-             <p><span>Last Name</span> <br /><input type="text" placeholder="" name="confirm-lastname"/></p>
-             <p><span>Passport Number</span> <br /><input type="text" placeholder="" name="confirm-passport-number"/></p>
-             <p><span>Phone Number</span> <br /><input type="text" placeholder="" name="confirm-phone"/></p>
-             <p><span>email</span> <br /><input type="email" placeholder="" name="confirm-email"/></p>
+             <p><span>First Name</span> <br /><input type="text" placeholder="" name="firstname"/></p>
+             <p><span>Last Name</span> <br /><input type="text" placeholder="" name="lastname"/></p>
+             <p><span>Passport Number</span> <br /><input type="text" placeholder="" name="passport-number"/></p>
+             <p><span>Phone Number</span> <br /><input type="text" placeholder="" name="phone"/></p>
+             <p><span>Email</span> <br /><input type="email" placeholder="" name="email"/></p>
+             <div className="pay-btn">
+               <span>PAY NOW</span><span><img src={img_pay} width="25" height="25"/></span>
+             </div>
          </form>
        </div>
-
      </div>
-     <div className="col-md-10">
-       <h3 className="section-tag">Confirm Billing Details</h3>
+     <br/>
+     <div className="col-lg-6">
+       <h3 className="section-tag">MANAGE CARDS</h3>
      <div className="payment-section">
-     <h4 className="pay-hero">Total Sum: <span>N567,849</span></h4>
-       <div className="payment-card">
+       <p>You currently have no saved card</p>
+
+       {/* <div className="payment-card">
          <div className="payment-card-top-master">
            <p>MASTERCARD</p>
          </div>
          <div className="payment-card-body">
            <span><img src="img/pay-img/mastercard-logo.png" width="40" height="30"/></span><span><span className="pay-confirm-hidden">XXXX XXXX XXXX </span>2345</span><span>08/17</span>
          </div>
-       </div>
-       <div className="payment-card">
+       </div> */}
+       {/* <div className="payment-card">
          <div className="payment-card-top-visa">
            <p>VISA</p>
          </div>
          <div className="payment-card-body-visa">
            <span><img src="img/pay-img/mastercard-logo.png" width="40" height="30"/></span><span><span className="pay-confirm-hidden">XXXX XXXX XXXX </span>2345</span><span>08/17</span>
          </div>
-       </div>
-       <br />
-       <a href="#" className="manage-cards"><span>Manage Cards</span></a>
-       <div className="pay-btn">
-         <a className="" href="#"><span> PAY</span><span><img src={img_pay} width="25" height="25"/></span></a>
-       </div>
+       </div> */}
+
        &nbsp;
-
      </div>
      </div>
-
+   </div>
      </div>
+   </div>
    </section>
-
-
     );
   }
 }
