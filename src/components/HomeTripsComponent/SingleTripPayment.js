@@ -11,6 +11,8 @@ import img_save from './img/save-icon.png';
 import img_pay from './img/pay-check.png';
 
 class SingleTripPayment extends Component {
+
+
   constructor(props){
     super(props);
     this.state = {
@@ -22,13 +24,17 @@ class SingleTripPayment extends Component {
         passportNumber: '',
         phone: '',
         disabled: true,
-        isSignedIn: false
+        isSignedIn: false,
+        getTrips: {}
     	};
+
+
 
       //Bind event to 'this'
       this.handleChange = this.handleChange.bind(this);
       this.enablePayment = this.enablePayment.bind(this);
   }
+
 
   callback = (response) => {
     console.log(response); // card charged successfully, get reference here
@@ -75,17 +81,6 @@ class SingleTripPayment extends Component {
       this.setState({ isSignedIn: true })
     }
 
-    this.setState({
-      amount: this.props.match.params.package_price*100,
-    })
-    this.props.match.params.package_price
-  }
-
-  render() {
-    if(this.state.isSignedIn === false) {
-      return(<Redirect to='/'/> )
-    }
-    const isDisabled = this.state.disabled;
     const tripId = this.props.match.params.name;
       if (tripId !== "" && !tripId) {
         return(
@@ -96,9 +91,19 @@ class SingleTripPayment extends Component {
           const isTrip = t => t.destination === tripId
           return Trip.intlTrips.find(isTrip)
       }
+    this.state.getTrips = getTrip(tripId);
+  }
 
-    const selectedTrip = getTrip(tripId);
+  this.setState({ amount: this.state.getTrips.package_price*100 });
 
+  }
+
+  render() {
+    if(this.state.isSignedIn === false) {
+      return(<Redirect to='/'/> )
+    }
+    const isDisabled = this.state.disabled;
+    const selectedTrip = this.state.getTrips;
     return(
     <section>
      <div className="container">
@@ -121,10 +126,10 @@ class SingleTripPayment extends Component {
            <div className="row confirm-pay">
              <form className="confirm-pay-container">
                  <p><span>Email: </span><br/><span><b>{this.state.email}</b></span></p>
-                 <p><span>First Name</span> <br /><input type="text" placeholder="" name="firstname" value={this.state.firstname} onChange={this.handleChange} required/></p>
-                 <p><span>Last Name</span> <br /><input type="text" placeholder="" name="lastname" value={this.state.lastname} onChange={this.handleChange} required/></p>
-                 <p><span>Passport Number</span> <br /><input type="text" placeholder="" name="passportNumber" value={this.state.passportNumber} onChange={this.handleChange} required/></p>
-                 <p><span>Phone Number</span> <br /><input type="text" placeholder="" name="phone" value={this.state.phone} onChange={this.handleChange} required/></p>
+                 <p><span>First Name</span> <br /><input type="text" placeholder="" name="firstname" value={this.state.firstname} onChange={this.handleChange} /></p>
+                 <p><span>Last Name</span> <br /><input type="text" placeholder="" name="lastname" value={this.state.lastname} onChange={this.handleChange} /></p>
+                 <p><span>Passport Number</span> <br /><input type="text" placeholder="" name="passportNumber" value={this.state.passportNumber} onChange={this.handleChange} /></p>
+                 <p><span>Phone Number</span> <br /><input type="text" placeholder="" name="phone" value={this.state.phone} onChange={this.handleChange} /></p>
                  <div className="">
                    <PaystackButton
                       text="PAY NOW"
@@ -173,7 +178,5 @@ class SingleTripPayment extends Component {
    </section>
     );
   }
-}
-
 }
 export default SingleTripPayment;
