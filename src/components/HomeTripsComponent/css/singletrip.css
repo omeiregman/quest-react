@@ -5,12 +5,19 @@
   margin-bottom: 2%;
 }
 
-.single-trips-header h3, h4 {
+.single-trips-header h3 {
   font-size: 28px;
   font-family: "Lato";
   color: rgb( 243, 235, 233 );
   font-weight: bold;
   font-style: italic;
+}
+
+.single-trips-header h4 {
+  font-size: 24px;
+  font-family: "Lato";
+  color: rgb( 243, 235, 233 );
+  font-weight: bold;
 }
 
 .single-trip-save {

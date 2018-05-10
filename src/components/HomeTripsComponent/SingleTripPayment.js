@@ -16,7 +16,7 @@ class SingleTripPayment extends Component {
     this.state = {
     		key: 'pk_test_8a48853663ac6b2c68f1e5cf9c346229c278d32d', //PAYSTACK PUBLIC KEY
     		email: 'ksquare267@gmail.com',  // customer email
-    		amount: 100000, //equals NGN100,
+    		amount: 0,//equals NGN100,
         firstname: '',
         lastname: '',
         passportNumber: '',
@@ -35,10 +35,8 @@ class SingleTripPayment extends Component {
     axios.get('http://rocky-tor-99302.herokuapp.com/api/quest/verify-payment/'+response.reference)
     .then((result) => {
     console.log(result);
-
     })
     .catch((error) => {
-
     });
   }
 
@@ -53,7 +51,6 @@ class SingleTripPayment extends Component {
 
     for( let i=0; i < 15; i++ )
     text += possible.charAt(Math.floor(Math.random() * possible.length));
-
     return text;
   }
 
@@ -78,10 +75,13 @@ class SingleTripPayment extends Component {
       this.setState({ isSignedIn: true })
     }
 
+    this.setState({
+      amount: this.props.match.params.package_price*100,
+    })
+    this.props.match.params.package_price
   }
 
   render() {
-
     if(this.state.isSignedIn === false) {
       return(<Redirect to='/'/> )
     }
@@ -95,60 +95,59 @@ class SingleTripPayment extends Component {
         const getTrip = (destination) => {
           const isTrip = t => t.destination === tripId
           return Trip.intlTrips.find(isTrip)
+      }
 
-        }
-       const selectedTrip = getTrip(tripId);
+    const selectedTrip = getTrip(tripId);
 
     return(
     <section>
      <div className="container">
        <div className="single-trips-header">
          <div className="row">
-             <div className="col-sm-6">
-                 <h3>Destination: {selectedTrip.destination}</h3>
-                 <h4>Total Sum: <span>N{selectedTrip.package_price}</span></h4>
-             </div>
-             <div className="col-sm-6">
-             </div>
-     </div>
+            <div className="col-sm-6">
+               <h3>Destination: {selectedTrip.destination}</h3>
+               <h4>Total Sum to pay: <span>N{selectedTrip.package_price}</span></h4>
+            </div>
+          <div className="col-sm-6">
+        </div>
+      </div>
      </div>
 
      {/* <!--CONFIRM AND PAY SECTION--> */}
-
      <div className="container">
        <div className="row">
          <div className="col-lg-6">
-       <h3 className="section-tag">Confirm your Personal details</h3>
-       <div className="row confirm-pay">
-         <form className="confirm-pay-container">
-             <p><span>Email: </span><span>{this.state.email}</span></p>
-             <p><span>First Name</span> <br /><input type="text" placeholder="" name="firstname" value={this.state.firstname} onChange={this.handleChange} required/></p>
-             <p><span>Last Name</span> <br /><input type="text" placeholder="" name="lastname" value={this.state.lastname} onChange={this.handleChange} required/></p>
-             <p><span>Passport Number</span> <br /><input type="text" placeholder="" name="passportNumber" value={this.state.passportNumber} onChange={this.handleChange} required/></p>
-             <p><span>Phone Number</span> <br /><input type="text" placeholder="" name="phone" value={this.state.phone} onChange={this.handleChange} required/></p>
-         </form>
-         <div className="">
-           <span><PaystackButton
-                  text="Pay Now"
-                  class="pay-btn"
-                  callback={this.callback}
-                  close={this.close}
-                  disabled={false}
-                  embed={false}
-                  reference={this.getReference()}
-                  email={this.state.email}
-                  amount={this.state.amount}
-                  paystackkey={this.state.key}
-                /></span><span><img src={img_pay} width="25" height="25"/></span>
-         </div>
+           <h3 className="section-tag">Confirm your Personal details and pay</h3>
+           <div className="row confirm-pay">
+             <form className="confirm-pay-container">
+                 <p><span>Email: </span><br/><span><b>{this.state.email}</b></span></p>
+                 <p><span>First Name</span> <br /><input type="text" placeholder="" name="firstname" value={this.state.firstname} onChange={this.handleChange} required/></p>
+                 <p><span>Last Name</span> <br /><input type="text" placeholder="" name="lastname" value={this.state.lastname} onChange={this.handleChange} required/></p>
+                 <p><span>Passport Number</span> <br /><input type="text" placeholder="" name="passportNumber" value={this.state.passportNumber} onChange={this.handleChange} required/></p>
+                 <p><span>Phone Number</span> <br /><input type="text" placeholder="" name="phone" value={this.state.phone} onChange={this.handleChange} required/></p>
+                 <div className="">
+                   <PaystackButton
+                      text="PAY NOW"
+                      class="pay-btn"
+                      callback={this.callback}
+                      close={this.close}
+                      disabled={false}
+                      embed={false}
+                      reference={this.getReference()}
+                      email={this.state.email}
+                      amount={this.state.amount}
+                      paystackkey={this.state.key}/>
+                    {/* <span><img src={img_pay} width="25" height="25"/></span> */}
+                </div>
+             </form>
 
-       </div>
-     </div>
-     <br/>
+          </div>
+        </div>
+        <br/>
      <div className="col-lg-6">
-       <h3 className="section-tag">MANAGE CARDS</h3>
+       <h3 className="section-tag">Pay with an existing card</h3>
      <div className="payment-section">
-       <p>You currently have no saved card</p>
+       <p>You dont have any saved card</p>
 
        {/* <div className="payment-card">
          <div className="payment-card-top-master">
@@ -166,11 +165,11 @@ class SingleTripPayment extends Component {
            <span><img src="img/pay-img/mastercard-logo.png" width="40" height="30"/></span><span><span className="pay-confirm-hidden">XXXX XXXX XXXX </span>2345</span><span>08/17</span>
          </div>
        </div> */}
-     </div>
-     </div>
-   </div>
-     </div>
-   </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
    </section>
     );
   }
