@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {Link, Redirect} from 'react-router-dom';
+import { PropagateLoader } from 'react-spinners';
 import './css/auth.css';
 
 import {PostData} from '../../services/PostData';
@@ -14,6 +15,7 @@ class SignIn extends Component {
       email:'',
       password:'',
       isSignedIn: false,
+      loading: false
     }
 
     this.signin = this.signin.bind(this);
@@ -29,20 +31,22 @@ class SignIn extends Component {
 
   signin = (e) => {
     e.preventDefault();
-    console.log("clicked signin");
     if(this.state.email && this.state.password){
+      this.setState({loading:true});
       PostData('login', this.state).then((result) => {
         let responseJSON = result;
-        if(responseJSON){
+        if(responseJSON.user_id){
           sessionStorage.setItem('userData', responseJSON);
           this.setState({isSignedIn: true});
-          console.log(sessionStorage);
-          console.log(this.state);
+          this.setState({loading: false});
         } else {
-          console.log("login error");
+          this.setState({ loading: false });
+          alert("Incorrect email or password");
         }
         console.log(responseJSON);
       });
+    } else {
+      alert("Please ensure all fields are filled correctly");
     }
   }
 
@@ -75,6 +79,11 @@ class SignIn extends Component {
                         <form className="login-container">
                             <p><input type="email" name="email" placeholder="Email" onChange={this.onChange}/></p>
                             <p><input type="password" name="password" placeholder="Password" onChange={this.onChange}/></p>
+                            <div className="loader"><PropagateLoader
+                                color={'rgb( 168, 100, 230 )'}
+                                loading={this.state.loading}
+                                size={10}
+                              /></div>
                             <p><input type="submit" value="SIGN IN" onClick={this.signin}/></p>
                             <p>New to Quest? <Link to="/signup">Create an Account</Link></p>
 

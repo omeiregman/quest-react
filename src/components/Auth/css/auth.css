@@ -1,5 +1,8 @@
 /*CSS STYLE FOR LOGIN AND SIGNUP PAGE*/
-
+.loader {
+  text-align: center;
+  margin-left: 47%;
+}
 
 /*OVERALL SECTION*/
 .login-section {

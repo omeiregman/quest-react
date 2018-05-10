@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './css/auth.css';
 import {Link, Redirect} from 'react-router-dom';
+import { PropagateLoader } from 'react-spinners';
 
 import {PostData} from '../../services/PostData';
 
@@ -16,7 +17,8 @@ class SignUp extends Component {
       validEmail: false,
       privacyChecked: false,
       matchPassword: false,
-      isSignedIn: false
+      isSignedIn: false,
+      loading: false
     }
 
     this.signUp = this.signUp.bind(this);
@@ -77,14 +79,13 @@ class SignUp extends Component {
     this.checkPasswords();
     console.log(this.state.matchPassword);
     if(this.state.email && this.state.password && this.state.matchPassword===true && this.state.validEmail===true) {
-      console.log(this.state.email);
-      console.log(this.state.password);
+      this.setState({ loading: true })
       PostData('registration', this.state).then((result) => {
         let responseJSON = result;
         if(responseJSON){
           sessionStorage.setItem('userData', responseJSON);
           this.setState({isSignedIn: true});
-          console.log("Registered");
+          this.setState({ loading: false })
         } else {
           console.log("login error");
         }
@@ -94,20 +95,6 @@ class SignUp extends Component {
   }
 
   render() {
-    // let checkboxError;
-    // let passwordError;
-    // let emailError;
-    //
-    // if(this.state.matchPassword === false) {
-    //   passwordError = "Passwords do not match!!!";
-    // }
-    //
-    // if(this.state.privacyChecked === false) {
-    //   checkboxError = "Please Acecpt privacy policy";
-    // }
-
-
-
     if(this.state.isSignedIn){
       return (<Redirect to='/'/>);
     }
@@ -138,6 +125,11 @@ class SignUp extends Component {
                             {/* <span>{passwordError}</span> */}
                             <input type="checkbox" onChange={this.handlePrivacyCheck} defaultChecked={this.state.privacyChecked}/>
                             {/* <span>{checkboxError}</span> */}
+                            <div className="loader"><PropagateLoader
+                                color={'rgb( 168, 100, 230 )'}
+                                loading={this.state.loading}
+                                size={10}
+                              /></div>
                             <p><input type="submit" value="GET STARTED" onClick={this.signUp}/></p>
                             <p>Already have a Quest Account? <Link to="/signin">Sign in</Link></p>
 
