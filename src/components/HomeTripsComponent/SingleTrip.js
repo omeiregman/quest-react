@@ -158,7 +158,7 @@ render() {
                   </p>
                   <div className="single-trip-join"  onClick={this.tripPayment}>
                       <span><img src={img_join_yellow} width="25" height="25" alt="Join img"/></span>
-                      <span className="single-join-text">JOIN TRIP</span>
+                      <span className="single-join-text">PROCEED TO PAYMENT</span>
                   </div>
                 </div>
             </div>
