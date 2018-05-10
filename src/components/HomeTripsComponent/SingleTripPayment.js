@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Redirect, Link } from 'react-router-dom';
+import PaystackButton from 'react-paystack';
+import axios from 'axios';
 
 import './css/payment.css';
 import Trip from './trip-data.json';
@@ -11,24 +13,79 @@ import img_pay from './img/pay-check.png';
 class SingleTripPayment extends Component {
   constructor(props){
     super(props);
+    this.state = {
+    		key: 'pk_test_8a48853663ac6b2c68f1e5cf9c346229c278d32d', //PAYSTACK PUBLIC KEY
+    		email: 'ksquare267@gmail.com',  // customer email
+    		amount: 100000, //equals NGN100,
+        firstname: '',
+        lastname: '',
+        passportNumber: '',
+        phone: '',
+        disabled: true,
+        isSignedIn: false
+    	};
 
-    this.state={
-      isSignedIn:false
+      //Bind event to 'this'
+      this.handleChange = this.handleChange.bind(this);
+      this.enablePayment = this.enablePayment.bind(this);
+  }
+
+  callback = (response) => {
+    console.log(response); // card charged successfully, get reference here
+    axios.get('http://rocky-tor-99302.herokuapp.com/api/quest/verify-payment/'+response.reference)
+    .then((result) => {
+    console.log(result);
+
+    })
+    .catch((error) => {
+
+    });
+  }
+
+  close = () => {
+    console.log("Payment closed");
+  }
+
+  getReference = () => {
+    //you can put any unique reference implementation code here
+    let text = "";
+    let possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-.=";
+
+    for( let i=0; i < 15; i++ )
+    text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+    return text;
+  }
+
+  handleChange = (event) => {
+    this.setState({[event.target.name]: event.target.value});
+    this.enablePayment();
+  }
+
+  enablePayment = () => {
+    if ((this.state.firstname || this.state.lastname || this.state.passportNumber || this.state.phone) !== '' ) {
+      this.setState({ disabled: false });
+    }
+    else {
+      this.setState({ disabled: true });
     }
   }
 
-componentWillMount() {
-  if(sessionStorage.getItem('userData')) {
-    this.setState({ isSignedIn: true })
+  componentWillMount() {
+    // const user = sessionStorage.getItem('userData');
+    //   this.setState({ email: user.email });
+    if(sessionStorage.getItem('userData')) {
+      this.setState({ isSignedIn: true })
+    }
+
   }
 
-}
-
   render() {
+
     if(this.state.isSignedIn === false) {
       return(<Redirect to='/'/> )
     }
-
+    const isDisabled = this.state.disabled;
     const tripId = this.props.match.params.name;
       if (tripId !== "" && !tripId) {
         return(
@@ -40,7 +97,6 @@ componentWillMount() {
           return Trip.intlTrips.find(isTrip)
 
         }
-        console.log(getTrip(tripId));
        const selectedTrip = getTrip(tripId);
 
     return(
@@ -65,15 +121,27 @@ componentWillMount() {
        <h3 className="section-tag">Confirm your Personal details</h3>
        <div className="row confirm-pay">
          <form className="confirm-pay-container">
-             <p><span>First Name</span> <br /><input type="text" placeholder="" name="firstname"/></p>
-             <p><span>Last Name</span> <br /><input type="text" placeholder="" name="lastname"/></p>
-             <p><span>Passport Number</span> <br /><input type="text" placeholder="" name="passport-number"/></p>
-             <p><span>Phone Number</span> <br /><input type="text" placeholder="" name="phone"/></p>
-             <p><span>Email</span> <br /><input type="email" placeholder="" name="email"/></p>
-             <div className="pay-btn">
-               <span>PAY NOW</span><span><img src={img_pay} width="25" height="25"/></span>
-             </div>
+             <p><span>Email: </span><span>{this.state.email}</span></p>
+             <p><span>First Name</span> <br /><input type="text" placeholder="" name="firstname" value={this.state.firstname} onChange={this.handleChange} required/></p>
+             <p><span>Last Name</span> <br /><input type="text" placeholder="" name="lastname" value={this.state.lastname} onChange={this.handleChange} required/></p>
+             <p><span>Passport Number</span> <br /><input type="text" placeholder="" name="passportNumber" value={this.state.passportNumber} onChange={this.handleChange} required/></p>
+             <p><span>Phone Number</span> <br /><input type="text" placeholder="" name="phone" value={this.state.phone} onChange={this.handleChange} required/></p>
          </form>
+         <div className="">
+           <span><PaystackButton
+                  text="Pay Now"
+                  class="pay-btn"
+                  callback={this.callback}
+                  close={this.close}
+                  disabled={false}
+                  embed={false}
+                  reference={this.getReference()}
+                  email={this.state.email}
+                  amount={this.state.amount}
+                  paystackkey={this.state.key}
+                /></span><span><img src={img_pay} width="25" height="25"/></span>
+         </div>
+
        </div>
      </div>
      <br/>
