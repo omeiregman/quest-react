@@ -23,19 +23,16 @@ class SingleTripPayment extends Component {
         lastname: '',
         passportNumber: '',
         phone: '',
-        disabled: true,
+        canPay: false,
         isSignedIn: false,
         getTrips: {}
     	};
-
-
 
       //Bind event to 'this'
       this.handleChange = this.handleChange.bind(this);
       this.enablePayment = this.enablePayment.bind(this);
       this.onClickPay = this.onClickPay.bind(this);
   }
-
 
   callback = (response) => {
     console.log(response); // card charged successfully, get reference here
@@ -67,11 +64,11 @@ class SingleTripPayment extends Component {
   }
 
   enablePayment = () => {
-    if ((this.state.firstname || this.state.lastname || this.state.passportNumber || this.state.phone) !== '' ) {
-      this.setState({ disabled: false });
+    if (this.state.firstname && this.state.lastname && this.state.passportNumber && this.state.phone) {
+      this.setState({ canPay: true });
     }
     else {
-      this.setState({ disabled: true });
+      this.setState({ canPay: false });
     }
   }
 
@@ -107,7 +104,7 @@ class SingleTripPayment extends Component {
     if(this.state.isSignedIn === false) {
       return(<Redirect to='/'/> )
     }
-    const isDisabled = this.state.disabled;
+    const canPay = this.state.canPay;
     const selectedTrip = this.state.getTrips;
     return(
     <section>
@@ -135,22 +132,25 @@ class SingleTripPayment extends Component {
                  <p><span>Last Name</span> <br /><input type="text" placeholder="" name="lastname" value={this.state.lastname} onChange={this.handleChange} /></p>
                  <p><span>Passport Number</span> <br /><input type="text" placeholder="" name="passportNumber" value={this.state.passportNumber} onChange={this.handleChange} /></p>
                  <p><span>Phone Number</span> <br /><input type="text" placeholder="" name="phone" value={this.state.phone} onChange={this.handleChange} /></p>
-                 <div className="" onClick={this.onClickPay}>
-                   <PaystackButton
-                      text="PAY NOW"
-                      class="pay-btn"
-                      callback={this.callback}
-                      close={this.close}
-                      disabled={false}
-                      embed={false}
-                      reference={this.getReference()}
-                      email={this.state.email}
-                      amount={this.state.amount}
-                      paystackkey={this.state.key}/>
-                    {/* <span><img src={img_pay} width="25" height="25"/></span> */}
-                </div>
+                 {(this.state.canPay === false) && (<div className="field-warning">Please fill all the fields to be able to proceed to payment</div>)}
+                {this.state.canPay === true ? (<div className="" onClick={this.onClickPay}>
+                  <PaystackButton
+                     text="PAY NOW"
+                     class="pay-btn"
+                     callback={this.callback}
+                     close={this.close}
+                     disabled={false}
+                     embed={false}
+                     reference={this.getReference()}
+                     email={this.state.email}
+                     amount={this.state.amount}
+                     paystackkey={this.state.key}/>
+                   {/* <span><img src={img_pay} width="25" height="25"/></span> */}
+               </div>) : (<div className="pay-btn-null" onClick={this.onClickPay}>
+                   PAY NOW
+                  {/* <span><img src={img_pay} width="25" height="25"/></span> */}
+              </div>)}
              </form>
-
           </div>
         </div>
         <br/>

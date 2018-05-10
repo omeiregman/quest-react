@@ -150,8 +150,31 @@
   cursor: pointer;
 }
 
+.pay-btn-null {
+  font-weight: 500;
+  color: #879090;
+  padding: 2%;
+  text-align: center;
+  border: solid 3px #879090;
+  width: 39%;
+  margin-left: 30%;
+  margin-top: 7%;
+  margin-bottom: 4%;
+  cursor: pointer;
+}
+
 .manage-cards {
   text-align: center;
   margin-left: 34%;
   font-weight: bold;
+}
+
+.test-hide {
+  display: none;
+}
+
+.field-warning {
+  color: red;
+  font-size: 0.85em;
+  text-align: center;
 }

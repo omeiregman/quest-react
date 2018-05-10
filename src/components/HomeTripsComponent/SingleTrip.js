@@ -156,10 +156,17 @@ render() {
                     <a>27 People Going</a> <br />
                     <a>Find out who is going</a>
                   </p>
-                  <div className="single-trip-join"  onClick={this.tripPayment}>
-                      <span><img src={img_join_yellow} width="25" height="25" alt="Join img"/></span>
+                  {togglePayment ? (<Link to={`/questtrip/payment/${selectedTrip.destination}`}>
+                    <div className="single-trip-join" >
+                        <span><img src={img_join_yellow} width="25" height="25" alt="join trip"/></span>
                       <span className="single-join-text">PROCEED TO PAYMENT</span>
-                  </div>
+                    </div>
+                  </Link>) : (<Link to={{ pathname: '/signin', state: { from: `/questtrip/payment/${selectedTrip.destination}`, info:"You need to be Signed in to Make Payments" }}}>
+                    <div className="single-trip-join" >
+                        <span><img src={img_join_yellow} width="25" height="25" alt="join trip"/></span>
+                      <span className="single-join-text">PROCEED TO PAYMENT</span>
+                    </div>
+                  </Link>)}
                 </div>
             </div>
             </div>
