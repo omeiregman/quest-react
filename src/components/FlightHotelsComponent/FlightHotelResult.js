@@ -5,7 +5,9 @@ import FlightHotelTab from 'react';
 class FlightHotelResult extends Component {
   render() {
     return(
-
+    <div>
+      <FlightHotelTab />
+    </div>
     );
   }
 }

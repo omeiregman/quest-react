@@ -7,11 +7,10 @@ import CreateTrip from './CreateTripsComponent/CreateTrip';
 import Home from './HomeScreen';
 import SingleTrip from './HomeTripsComponent/SingleTrip';
 import PageNotFound from './pagenotfound';
-import SingleTry from './singletry';
 import SignIn from './Auth/SignIn';
 import SignUp from './Auth/SignUp';
 import SingleTripPayment from './HomeTripsComponent/SingleTripPayment';
-
+import Settings from './SettingsComponent/Settings';
 
 
 
@@ -70,7 +69,7 @@ class Root extends Component {
         <Route path="/signin" component={SignIn}/>
         <Route path='/signup' component={SignUp}/>
         <Route path="/404" component={PageNotFound}/>
-        <Route path="/singletry/:id" render={props => <SingleTry {...props} />}/>
+        {/* <Route path="/settings" render={props => }/> */}
         </Switch>
       </div>
     );

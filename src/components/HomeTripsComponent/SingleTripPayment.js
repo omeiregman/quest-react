@@ -12,10 +12,23 @@ class SingleTripPayment extends Component {
   constructor(props){
     super(props);
 
+    this.state={
+      isSignedIn:false
+    }
   }
 
+componentWillMount() {
+  if(sessionStorage.getItem('userData')) {
+    this.setState({ isSignedIn: true })
+  }
+
+}
 
   render() {
+    if(this.state.isSignedIn === false) {
+      return(<Redirect to='/'/> )
+    }
+
     const tripId = this.props.match.params.name;
       if (tripId !== "" && !tripId) {
         return(
@@ -85,8 +98,6 @@ class SingleTripPayment extends Component {
            <span><img src="img/pay-img/mastercard-logo.png" width="40" height="30"/></span><span><span className="pay-confirm-hidden">XXXX XXXX XXXX </span>2345</span><span>08/17</span>
          </div>
        </div> */}
-
-       &nbsp;
      </div>
      </div>
    </div>
