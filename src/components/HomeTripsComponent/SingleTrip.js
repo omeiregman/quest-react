@@ -13,36 +13,32 @@ class SingleTrip extends Component {
   constructor(props){
     super(props);
 
+    this.state={
+      isSignedIn: false
+    }
 
+//this.tripPayment =  this.tripPayment.bind(this);
 
     //this.populateTripData = this.populateTripData.bind(this);
   }
 
-  componentDidMount() {
-    window.scrollTo(0,0);
-    //populateTripData();
+  componentWillMount() {
+    if (sessionStorage.getItem('userData')) {
+      this.setState({ isSignedIn: true})
+    }
   }
 
-//   populateTripData = () => {
-//     const newTripId = this.state.selectedTrip;
-//     if (newTripId !== "" && !newTripId) {
-//       return(
-//         <Redirect to={{ pathname: "/404" }} />
-//       );
-//     } else {
-//       const getTrip = (destination) => {
-//         const isTrip = t => t.destination === tripId
-//         return Trip.intlTrips.find(isTrip)
-//     }
-//     const selectedTrip = getTrip(newTripId);
-//   }
-// }
-
-  componentWillMount() {
-
+  componentDidMount() {
+    window.scrollTo(0,0);
   }
 
 render() {
+  let togglePayment = false;
+  if (this.state.isSignedIn == true) {
+    togglePayment = true;
+  } else {
+    togglePayment = false;
+  }
   const tripId = this.props.match.params.name;
     if (tripId !== "" && !tripId) {
       return(
@@ -52,7 +48,6 @@ render() {
       const getTrip = (destination) => {
         const isTrip = t => t.destination === tripId
         return Trip.intlTrips.find(isTrip)
-
       }
       console.log(getTrip(tripId));
      const selectedTrip = getTrip(tripId);
@@ -92,10 +87,17 @@ render() {
                     <p>
                         PRICE: <span>{selectedTrip.package_price}</span>
                     </p>
-                    <div className="single-trip-join">
-                        <span><img src={img_join_yellow} width="25" height="25" alt="join trip"/></span>
-                      <span className="single-join-text"><Link to={`/questtrip/payment/${selectedTrip.destination}`}>JOIN TRIP</Link></span>
-                    </div>
+                    {togglePayment ? (<Link to={`/questtrip/payment/${selectedTrip.destination}`}>
+                      <div className="single-trip-join" >
+                          <span><img src={img_join_yellow} width="25" height="25" alt="join trip"/></span>
+                        <span className="single-join-text">PROCEED TO PAYMENT</span>
+                      </div>
+                    </Link>) : (<Link to={{ pathname: '/signin', state: { from: `/questtrip/payment/${selectedTrip.destination}`, info:"You need to be Signed in to Make Payments" }}}>
+                      <div className="single-trip-join" >
+                          <span><img src={img_join_yellow} width="25" height="25" alt="join trip"/></span>
+                        <span className="single-join-text">PROCEED TO PAYMENT</span>
+                      </div>
+                    </Link>)}
                     <span className="single-time">
                         Time Remaining: <br /> <span>21 days, 21:05:33</span>
                     </span>
@@ -154,7 +156,7 @@ render() {
                     <a>27 People Going</a> <br />
                     <a>Find out who is going</a>
                   </p>
-                  <div className="single-trip-join">
+                  <div className="single-trip-join"  onClick={this.tripPayment}>
                       <span><img src={img_join_yellow} width="25" height="25" alt="Join img"/></span>
                       <span className="single-join-text">JOIN TRIP</span>
                   </div>

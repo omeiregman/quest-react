@@ -36,29 +36,12 @@ class SingleTripPayment extends Component {
        <div className="single-trips-header">
          <div className="row">
              <div className="col-md-6">
-                 <h3>Inapueto, Morata de grannes <br /> Helsinki, Finland</h3>
+                 <h3>{selectedTrip.destination}</h3>
              </div>
              <div className="col-md-6">
-                 <span>
-           <div className="single-trip-save">
-           <span><img src={img_save} width="25" height="25"/></span>
-                 <span className="single-save-text">SAVE TO MY TRIPS</span>
-             </div>
-             </span>
-             <span><a href="#">
-         <div className="single-trip-share">
-           <span><img src={img_share} width="25" height="25"/></span>
-             <span className="single-save-text">SHARE</span>
-         </div></a>
-         </span>
+          </div>
      </div>
      </div>
-     </div>
-
-     <div className="single-trip-banner">
-
-     </div>
-
 
      {/* <!--CONFIRM AND PAY SECTION--> */}
 

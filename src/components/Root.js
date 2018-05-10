@@ -14,33 +14,43 @@ import SingleTripPayment from './HomeTripsComponent/SingleTripPayment';
 
 
 
+
+
 class Root extends Component {
+
 
   constructor(props){
     super(props);
 
     this.state = {
-
+      isSignedIn: false,
     }
-  }
 
-  // const PrivateRoute = ({ component: Component, ...rest }) => {
-  //   <Route {...rest} render={(props) => (
-  //     this.state.isSignedIn === true
-  //     ? <Component {...props}/>
-  //     : <Redirect to='/signin' />
-  //   )}/>
-  // }
+    //this.PrivateRoute = this.PrivateRoute.bind(this);
+  }
 
 
   componentWillMount() {
-    // if(sessionStorage.getItem('userData')) {
-    //   console.log("call user feed");
-    // } else {
-    //   this.setState({ isSignedIn: true })
-    // }
+    if(sessionStorage.getItem('userData')) {
+      this.setState({
+        isSignedIn:true
+      })
+    } else {
+      this.setState({ isSignedIn: false })
+    }
   }
 
+  componentDidMount() {
+
+  }
+
+  // PrivateRoute = ({ component: Component, ...rest }) => (
+  //   <Route {...rest} render={(props) => (
+  //     sessionStorage.getItem('userData')
+  //       ? <Component {...props} />
+  //       : <Redirect to='/signin'/>
+  //   )} />
+  // )
 
 
   render() {
@@ -65,8 +75,6 @@ class Root extends Component {
       </div>
     );
   }
-
-
 }
 
 export default Root;

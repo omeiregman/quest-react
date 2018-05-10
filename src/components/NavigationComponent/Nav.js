@@ -9,39 +9,33 @@ class Nav extends Component {
     super(props);
 
     this.state={
-      signedIn:false,
+      isSignedIn:false,
     }
-
     this.signOut = this.signOut.bind(this);
   }
 
 componentWillMount() {
   if(sessionStorage.getItem('userData')){
-    this.setState({ signedIn: true })
+    this.setState({ isSignedIn: true })
   }
 }
 
 componentDidMount () {
   if(sessionStorage.getItem('userData')){
-    this.setState({ signedIn: true })
+    this.setState({ isSignedIn: true })
     this.render();
   }
-  //  else {
-  //   this.setState({ signedIn: false })
-  // }
-  console.log(this.state)
 }
 
 signOut(){
   sessionStorage.setItem('userData', '');
   sessionStorage.clear();
-  this.setState({ signedIn: false });
-  console.log(this.state);
+  this.setState({ isSignedIn: false });
   return(<Redirect to='/' />)
 }
 
   render () {
-    const isSignedIn = this.state.signedIn;
+    const isSignedIn = this.state.isSignedIn;
     return(
 
       <div className="container">
@@ -74,8 +68,6 @@ signOut(){
                         )}
                   </div>
               </div>
-
-
           </nav>
       </div>
 

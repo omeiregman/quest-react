@@ -13,7 +13,7 @@ class SignIn extends Component {
     this.state = {
       email:'',
       password:'',
-      isSignedIn: false
+      isSignedIn: false,
     }
 
     this.signin = this.signin.bind(this);
@@ -49,13 +49,15 @@ class SignIn extends Component {
 
 
   render() {
+    const { from } = this.props.location.state || { from: { pathname: '/' }}
+    const { info } = this.props.location.state || { info: ""}
 
     if(this.state.isSignedIn) {
-      return(<Redirect to='/'/> )
+      return(<Redirect to={from}/> )
     }
 
     if(sessionStorage.getItem('userData')) {
-      return(<Redirect to='/'/> )
+      return(<Redirect to={from}/> )
     }
     return (
       <section>
@@ -66,6 +68,7 @@ class SignIn extends Component {
                     <p>
                         Welcome Back, <br /> Are you ready for the next Quest?
                     </p>
+                    <p>{info}</p>
                 </div>
                 <div className="col-md-8 login-right">
                     <div className="login">
