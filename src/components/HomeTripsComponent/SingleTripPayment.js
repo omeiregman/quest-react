@@ -32,6 +32,7 @@ class SingleTripPayment extends Component {
       this.handleChange = this.handleChange.bind(this);
       this.enablePayment = this.enablePayment.bind(this);
       this.onClickPay = this.onClickPay.bind(this);
+      this.getUserData = this.getUserData.bind(this);
   }
 
   callback = (response) => {
@@ -76,6 +77,14 @@ class SingleTripPayment extends Component {
     e.preventDefault();
   }
 
+  getUserData = () => {
+
+  }
+
+  componentDidMount () {
+
+  }
+
   componentWillMount() {
     // const user = sessionStorage.getItem('userData');
     //   this.setState({ email: user.email });
@@ -96,7 +105,7 @@ class SingleTripPayment extends Component {
     this.state.getTrips = getTrip(tripId);
   }
 
-  this.setState({ amount: this.state.getTrips.package_price*100 });
+  this.setState({ amount: this.state.getTrips.package_price });
 
   }
 
@@ -127,12 +136,12 @@ class SingleTripPayment extends Component {
            <h3 className="section-tag">Confirm your Personal details and pay</h3>
            <div className="row confirm-pay">
              <form className="confirm-pay-container">
-                 <p><span>Email: </span><br/><span><b>{this.state.email}</b></span></p>
+                 <p><span>Email: </span><br/><input type="email" placeholder="" name="email" value={this.state.email} onChange={this.handleChange} /></p>
                  <p><span>First Name</span> <br /><input type="text" placeholder="" name="firstname" value={this.state.firstname} onChange={this.handleChange} /></p>
                  <p><span>Last Name</span> <br /><input type="text" placeholder="" name="lastname" value={this.state.lastname} onChange={this.handleChange} /></p>
                  <p><span>Passport Number</span> <br /><input type="text" placeholder="" name="passportNumber" value={this.state.passportNumber} onChange={this.handleChange} /></p>
                  <p><span>Phone Number</span> <br /><input type="text" placeholder="" name="phone" value={this.state.phone} onChange={this.handleChange} /></p>
-                 {(this.state.canPay === false) && (<div className="field-warning">Please fill all the fields to be able to proceed to payment</div>)}
+                 {(this.state.canPay === false) && (<div className="field-warning">You must fill up all fields to proceed to payment</div>)}
                 {this.state.canPay === true ? (<div className="" onClick={this.onClickPay}>
                   <PaystackButton
                      text="PAY NOW"
