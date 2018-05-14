@@ -36,6 +36,13 @@ a {
   text-align: right;
 }
 
+/*ALERT BUTTON*/
+.alert {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 
 /**UPCOMING TRIPS*/
 

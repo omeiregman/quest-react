@@ -9,23 +9,20 @@ class Nav extends Component {
     super(props);
 
     this.state={
-      isSignedIn:false,
+      isSignedIn:false
     }
     this.signOut = this.signOut.bind(this);
+    console.log(this);
   }
 
 componentWillMount() {
   if(sessionStorage.getItem('userData')){
     this.setState({ isSignedIn: true })
+    console.log('this')
+    console.log(this)
   }
 }
 
-componentDidMount () {
-  if(sessionStorage.getItem('userData')){
-    this.setState({ isSignedIn: true })
-    this.render();
-  }
-}
 
 signOut(){
   sessionStorage.setItem('userData', '');
