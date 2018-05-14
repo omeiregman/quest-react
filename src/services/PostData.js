@@ -3,25 +3,6 @@
 export function PostData(type, userData) {
 
  let BaseUrl = 'http://rocky-tor-99302.herokuapp.com/api/auth/';
- //let BaseUrl = 'https://api.thewallscript.com/restful/';
-
-  // axios.post(BaseUrl+type, userData
-  //   , {
-  //     headers:{
-  //       // 'Content-type': "application/json"
-  //     }
-  // })
-  // .then(function (response) {
-  //   console.log(response);
-  //
-  //   return response;
-  // })
-  // .catch(function (error) {
-  //   console.log(error);
-  // });
-
-
-
 
   return new Promise((resolve, reject) => {
 
@@ -30,7 +11,22 @@ export function PostData(type, userData) {
         headers: {
            'Content-type' : 'application/json'
         },
-        body: JSON.stringify(userData)
+        body: 	{
+      "tripType": 1,
+      "ticketClass": 1,
+      "travellerDetail":{
+        "adults": 1,
+        "children": 0,
+        "infants": 0
+      },
+      "flightItineraryDetail": [
+        {
+          "originAirportCode": "LOS",
+          "destinationAirportCode": "ABV",
+          "departureDate":"14/05/2018"
+        }
+      ]
+    }
       })
       .then((response) => response.json())
       .then((responseJson) => {

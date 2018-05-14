@@ -89,7 +89,17 @@
             "package_price": 550000,
             "id": 9,
             "image_path_single_page": "Zanzibar_2.jpg"
-        }
+        },
+        {
+                "destination": "Cape Town",
+                "return_date": "2018-04-29",
+                "image_path_home_page": "small-trips-6.jpg",
+                "departure_date": "2018-04-24",
+                "package_price_2": "0",
+                "package_price": 550000,
+                "id": 10,
+                "image_path_single_page": "cape_town_2.jpg"
+            }
     ]
 
   }
