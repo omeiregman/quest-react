@@ -14,12 +14,16 @@ class SignIn extends Component {
     this.state = {
       email:'',
       password:'',
+      flashMsg: '',
+      flashMsgVisibility: 'hidden',
       isSignedIn: false,
       loading: false
     }
 
     this.signin = this.signin.bind(this);
     this.onChange = this.onChange.bind(this);
+    this.setFlashMsg = this.setFlashMsg.bind(this);
+    this.closeFlash = this.closeFlash.bind(this);
   }
 
 
@@ -29,24 +33,41 @@ class SignIn extends Component {
     })
   }
 
+// this function sets the proper Flash Message and displays it,
+// it also closes the flash Message after the setTimeout function within
+  setFlashMsg = (args) => {
+    this.setState({'flashMsg': args});
+    this.setState({ loading: false });
+    this.setState({ flashMsgVisibility: 'block' })
+      setTimeout(() => {
+        this.setState({ flashMsgVisibility: 'hidden' });
+      }, 5000);
+  }
+
+//this function closes the flash message
+  closeFlash = (event) => {
+    event.preventDefault();
+    this.setState({flashMsgVisibility: 'hidden'});
+  }
+
   signin = (e) => {
     e.preventDefault();
     if(this.state.email && this.state.password){
       this.setState({loading:true});
       PostData('login', this.state).then((result) => {
         let responseJSON = result;
+        console.log(responseJSON)
         if(responseJSON.user_id){
           sessionStorage.setItem('userData', responseJSON);
           this.setState({isSignedIn: true});
           this.setState({loading: false});
         } else {
-          this.setState({ loading: false });
-          alert("Incorrect email or password");
+          this.setFlashMsg("Incorrect email or password");
         }
-        console.log(responseJSON);
+        this.setFlashMsg(responseJSON.message);
       });
     } else {
-      alert("Please ensure all fields are filled correctly");
+      this.setFlashMsg("Please ensure all fields are filled correctly");
     }
   }
 
@@ -79,11 +100,16 @@ class SignIn extends Component {
                         <form className="login-container">
                             <p><input type="email" name="email" placeholder="Email" onChange={this.onChange}/></p>
                             <p><input type="password" name="password" placeholder="Password" onChange={this.onChange}/></p>
-                            <div className="loader"><PropagateLoader
+                            <div className="loader">
+                              <PropagateLoader
                                 color={'rgb( 168, 100, 230 )'}
                                 loading={this.state.loading}
                                 size={10}
-                              /></div>
+                              />
+                            </div>
+                            <div className={'row alert alert-warning alert-dismissable text-center ' + this.state.flashMsgVisibility}>
+                              <span>{this.state.flashMsg}</span>.
+                            </div>
                             <p><input type="submit" value="SIGN IN" onClick={this.signin}/></p>
                             <p>New to Quest? <Link to="/signup">Create an Account</Link></p>
 
@@ -95,6 +121,7 @@ class SignIn extends Component {
                             Sign in with Google
                           </button>
                         </form>
+
                     </div>
                 </div>
             </div>

@@ -14,6 +14,8 @@ class SignUp extends Component {
       email:'',
       password:'',
       confirmPassword: '',
+      flashMsg: '',
+      flashMsgVisibility: 'hidden',
       validEmail: false,
       privacyChecked: false,
       matchPassword: false,
@@ -25,6 +27,8 @@ class SignUp extends Component {
     this.onChange = this.onChange.bind(this);
     this.checkPasswords = this.checkPasswords.bind(this);
     this.emailCheck = this.emailCheck.bind(this);
+    this.setFlashMsg = this.setFlashMsg.bind(this);
+    this.closeFlash = this.closeFlash.bind(this);
   }
 
 
@@ -34,14 +38,32 @@ class SignUp extends Component {
     })
   }
 
+// this function sets the proper Flash Message and displays it,
+// it also closes the flash Message after the setTimeout function within
+  setFlashMsg(args) {
+    this.setState({'flashMsg': args});
+    this.setState({ loading: false })
+    this.setState({ flashMsgVisibility: 'block' })
+      setTimeout(() => {
+        this.setState({ flashMsgVisibility: 'hidden' });
+      }, 5000);
+  }
+
+//this function closes the flash message
+  closeFlash() {
+    this.setState({flashMsgVisibility: 'hidden'});
+  }
+
+
   checkPasswords = () => {
     if (this.state.password === this.state.confirmPassword){
       this.setState({ matchPassword: true });
     } else {
-      alert("Passwords do not match");
+      this.setState({ matchPassword: false });
+      this.setFlashMsg("Passwords do not match");
     }
     if (this.state.privacyChecked === false) {
-      alert("Please ensure you Accept our Terms and Conditions");
+      this.setFlashMsg("Please ensure you Accept our Terms and Conditions");
     }
   }
 
@@ -55,9 +77,46 @@ class SignUp extends Component {
     this.setState({
       validEmail:false
     })
-    alert("incorrect email");
+    this.setFlashMsg("incorrect email");
   }
   }
+
+  signUp = (e) => {
+    e.preventDefault();
+    this.setState({ loading: true })
+    const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if (emailRegex.test(this.state.email) == true) {
+      if (this.state.password && this.state.password === this.state.confirmPassword){
+        if (this.state.privacyChecked === true) {
+          PostData('registration', this.state).then((result) => {
+            let responseJSON = result;
+            console.log(responseJSON);
+            if(responseJSON.access_token){
+              this.setFlashMsg(responseJSON.message);
+              sessionStorage.setItem('userData', responseJSON);
+              setTimeout(() => {
+                this.setState({isSignedIn: true});
+              }, 1000);
+
+            } else {
+              this.setFlashMsg("login error");
+            }
+            this.setFlashMsg(responseJSON.message);
+          });
+        }
+        else {
+          this.setFlashMsg("Please ensure you Accept our Terms and Conditions");
+        }
+      }
+      else {
+        this.setFlashMsg("Password Cant be Empty and Passwords must match");
+      }
+    }
+    else {
+      this.setFlashMsg("incorrect email");
+    }
+  }
+
 
 
   handlePrivacyCheck = () => {
@@ -73,34 +132,10 @@ class SignUp extends Component {
   }
 
 
-  signUp = (e) => {
-    e.preventDefault();
-    this.emailCheck();
-    this.checkPasswords();
-    console.log(this.state.matchPassword);
-    if(this.state.email && this.state.password && this.state.matchPassword===true && this.state.validEmail===true) {
-      this.setState({ loading: true })
-      PostData('registration', this.state).then((result) => {
-        let responseJSON = result;
-        if(responseJSON){
-          sessionStorage.setItem('userData', responseJSON);
-          this.setState({isSignedIn: true});
-          this.setState({ loading: false })
-        } else {
-          console.log("login error");
-        }
-        console.log(responseJSON);
-      });
-    }
-  }
 
   render() {
     if(this.state.isSignedIn){
       return (<Redirect to='/'/>);
-    }
-
-    if(sessionStorage.getItem('userData')) {
-      return(<Redirect to='/'/> )
     }
 
     return (
@@ -125,11 +160,16 @@ class SignUp extends Component {
                             {/* <span>{passwordError}</span> */}
                             <input type="checkbox" onChange={this.handlePrivacyCheck} defaultChecked={this.state.privacyChecked}/>
                             {/* <span>{checkboxError}</span> */}
-                            <div className="loader"><PropagateLoader
+                            <div className="loader">
+                              <PropagateLoader
                                 color={'rgb( 168, 100, 230 )'}
                                 loading={this.state.loading}
                                 size={10}
-                              /></div>
+                              />
+                            </div>
+                            <div className={'row alert alert-warning alert-dismissable text-center ' + this.state.flashMsgVisibility}>
+                              <span>{this.state.flashMsg}</span>.
+                            </div>
                             <p><input type="submit" value="GET STARTED" onClick={this.signUp}/></p>
                             <p>Already have a Quest Account? <Link to="/signin">Sign in</Link></p>
 
