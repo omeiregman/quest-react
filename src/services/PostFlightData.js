@@ -3,7 +3,7 @@
 
 export function PostFlightData(type, flightData) {
 
-      let BaseUrl = "http://rocky-tor-99302.herokuapp.com/api/flight/";
+      let BaseUrl = "http://quest-test.herokuapp.com/api/flight/";
 
 console.log(flightData);
 

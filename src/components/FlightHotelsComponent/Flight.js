@@ -18,10 +18,10 @@ class Flight extends Component {
       from:'',
       to:'',
       tripType:1,
-      ticketClass:0,
+      ticketClass:1,
       adult: 1,
-      children: '',
-      infants: '',
+      children: 0,
+      infants: 0,
       originAirportCode:'LOS',
       destinationAirportCode:'ABV',
       departureDate: moment().format('L'),
@@ -82,7 +82,7 @@ class Flight extends Component {
             <div className="flight-search">
               <form>
                 <div className="row">
-                  <div className="col-sm-4">
+                  <div className="col-md-4">
                     <span>Flying From:</span>
                     <div className="input-icon-wrap">
                       {/* <span className="input-icon"><i className="fas fa-fighter-jet fa-lg fa-fw"></i></span> */}
@@ -90,7 +90,7 @@ class Flight extends Component {
                     </div>
                   </div>
 
-                  <div className="col-sm-4">
+                  <div className="col-md-4">
                     <span>Flying To:</span>
                     <div className="input-icon-wrap">
                       {/* <span className="input-icon"><i className="fas fa-fighter-jet fa-lg fa-fw"></i></span> */}
@@ -98,7 +98,7 @@ class Flight extends Component {
                     </div>
                   </div>
 
-                  <div className="col-sm-4">
+                  <div className="col-md-4">
                     <div className="row input-icon-wrap">
                         <div className="col-sm-4">
                           <span>Adult</span>
@@ -114,12 +114,9 @@ class Flight extends Component {
                         </div>
                     </div>
 
-
                     <div className="input-icon-wrap">
                       {/* <span className="input-icon"><i className="fa fa-user fa-lg fa-fw"></i></span>
                        */}
-
-
 
                     </div>
                   </div>

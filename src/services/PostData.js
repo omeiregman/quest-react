@@ -2,7 +2,7 @@
 
 export function PostData(type, userData) {
 
- let BaseUrl = 'http://rocky-tor-99302.herokuapp.com/api/auth/';
+ let BaseUrl = 'http://quest-test.herokuapp.com/api/auth/';
 
   return new Promise((resolve, reject) => {
 
