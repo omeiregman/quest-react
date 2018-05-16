@@ -14,7 +14,7 @@ class Flight extends Component {
     this.state = {
       query: '',
       results: [],
-      tripTypeString:'',
+      tripTypeSelected:'oneWay',
       from:'',
       to:'',
       tripType:1,
@@ -31,17 +31,31 @@ class Flight extends Component {
     }
 
       this.handleSearchClick = this.handleSearchClick.bind(this);
-      this.queryDate = this.queryDate.bind(this);
+      this.queryOneWayData = this.queryOneWayData.bind(this);
+      this.queryRoundTripData = this.queryRoundTripData.bind(this);
+      this.onClickOneWay = this.onClickOneWay.bind(this);
+      this.onClickRoundTrip = this.onClickRoundTrip.bind(this);
+      this.onClickMultiple = this.onClickMultiple.bind(this);
+
   }
 
   handleSearchClick = (e) => {
     e.preventDefault();
     console.log("Search Clicked");
     //console.log(this.queryDate());
-    PostFlightData("process-flight-search", this.queryDate()).then((result) => {
+
+    if (this.state.tripTypeSelected === 'oneWay') {
+      PostFlightData("process-flight-search", this.queryOneWayData()).then((result) => {
       let responseJSON = result;
       console.log(responseJSON);
     });
+    }
+    if (this.state.tripTypeSelected === 'roundTrip') {
+      PostFlightData("process-flight-search", this.queryRoundTripData()).then((result) => {
+        let responseJSON = result;
+        console.log(result);
+      });
+    }
   }
 
   onFormChange = (e) => {
@@ -50,7 +64,7 @@ class Flight extends Component {
   });
 }
 
-  queryDate = () => {
+  queryOneWayData = () => {
     let data = {
                     "tripType" : this.state.tripType,
                     "ticketClass" : Number(this.state.ticketClass),
@@ -68,15 +82,63 @@ class Flight extends Component {
                     ]
                   }
                   return data;
+              }
+
+      queryRoundTripData = () => {
+          let data = {
+                      "tripType" : this.state.tripType,
+                      "ticketClass" : Number(this.state.ticketClass),
+                      "travellerDetail" : {
+                        "adults" : this.state.adult,
+                        "children" : this.state.children,
+                        "infants" : this.state.infants
+                      },
+                      flightItineraryDetail: [
+                        {
+                          "originAirportCode": this.state.originAirportCode,
+                          "destinationAirportCode": this.state.destinationAirportCode,
+                          "departureDate":this.state.departureDate
+                        },
+                        {
+                          "originAirportCode": this.state.destinationAirportCode,
+                          "destinationAirportCode": this.state.originAirportCode,
+                          "departureDate":this.state.departureDateTwo
+                        }
+                      ]
+                    }
+                    return data;
                 }
 
+  onClickOneWay = () => {
+    this.setState({
+      tripTypeSelected: "oneWay"
+    })
+    console.log(this.state.tripTypeSelected);
+  }
+
+  onClickRoundTrip = () => {
+    this.setState({
+      tripTypeSelected: "roundTrip"
+    })
+    console.log(this.state.tripTypeSelected);
+  }
+
+  onClickMultiple = () => {
+    this.setState({
+      tripTypeSelected: "multiple"
+    })
+    console.log(this.state.tripTypeSelected);
+  }
+
   render() {
+    let tripTypeSelected = this.state.tripTypeSelected;
+
     return (
       <div>
         <div className="tripType-btn">
-          <span>One Way</span>
-          <span>Round Trip</span>
-          <span>Multiple Destination</span>
+          <span onClick={this.onClickOneWay}>One Way</span>
+          <span onClick={this.onClickRoundTrip}>Round Trip</span>
+          <span onClick={this.onClickMultiple}>Multiple Destination</span>
         </div>
           <div className="container">
             <div className="flight-search">
@@ -124,7 +186,7 @@ class Flight extends Component {
                 <br></br>
 
                 <div className="row">
-                  <div className="col-sm-4">
+                  <div className="col-md">
                     <span>Departure:</span>
                     <div className="input-icon-wrap">
                       {/* <span className="input-icon"><i className="fa fa-user fa-lg fa-fw"></i></span> */}
@@ -136,7 +198,19 @@ class Flight extends Component {
                     </div>
                   </div>
 
-                  <div className="col-sm-4 inputWithIcon inputIconBg">
+                  {(tripTypeSelected === "roundTrip") && (<div className="col-md">
+                    <span>Return:</span>
+                    <div className="input-icon-wrap">
+                      {/* <span className="input-icon"><i className="fa fa-user fa-lg fa-fw"></i></span> */}
+                      <input type="text" name="departureDateTwo" value={this.state.departureDateTwo} onChange={this.onFormChange}/>
+                      {/* <DatePicker
+                      selected={this.state.departureDate}
+                      onChange={this.onFormChange}
+                      /> */}
+                    </div>
+                  </div>)}
+
+                  <div className="col-md inputWithIcon inputIconBg">
                     <span>Seat Class:</span>
                     <div className="input-icon-wrap">
                       {/* <span className="input-icon"><i className="fa fa-user fa-lg fa-fw"></i></span> */}
@@ -149,7 +223,7 @@ class Flight extends Component {
                     </div>
                   </div>
 
-                  <div className="col-sm-4">
+                  <div className="col-md">
                     <br></br>
                     <div className="search-btn" onClick={this.handleSearchClick}>Search Flight</div>
                   </div>

@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import { Redirect, Link } from 'react-router-dom';
+import { Redirect, } from 'react-router-dom';
 import PaystackButton from 'react-paystack';
 import axios from 'axios';
 
 import './css/payment.css';
 import Trip from './trip-data.json';
 
-import img_share from './img/share-icon.png';
-import img_save from './img/save-icon.png';
-import img_pay from './img/pay-check.png';
+// import img_share from './img/share-icon.png';
+// import img_save from './img/save-icon.png';
+// import img_pay from './img/pay-check.png';
 
 class SingleTripPayment extends Component {
 
@@ -102,7 +102,9 @@ class SingleTripPayment extends Component {
           const isTrip = t => t.destination === tripId
           return Trip.intlTrips.find(isTrip)
       }
-    this.state.getTrips = getTrip(tripId);
+    this.setState ({
+      getTrips: getTrip(tripId)
+    });
   }
 
   this.setState({ amount: this.state.getTrips.package_price });
