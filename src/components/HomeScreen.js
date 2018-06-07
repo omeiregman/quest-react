@@ -11,7 +11,7 @@ class HomeScreen extends Component {
     return (
       <div>
         <Banner/>
-        <FlightHotelTab/>
+        {/* <FlightHotelTab/> */}
         <TripDashboard/>
       </div>
 
