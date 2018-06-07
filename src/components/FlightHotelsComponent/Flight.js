@@ -56,6 +56,8 @@ class Flight extends Component {
         console.log(result);
       });
     }
+    const flightData = this.state.tripTypeSelected;
+    this.props.history.push(`/process-flight-search/${flightData}`);
   }
 
   onFormChange = (e) => {
@@ -225,7 +227,7 @@ class Flight extends Component {
 
                   <div className="col-md">
                     <br></br>
-                    <div className="search-btn" onClick={this.handleSearchClick}>Search Flight</div>
+                    <div className="search-btn">Search Flight</div>
                   </div>
                 </div>
               </form>

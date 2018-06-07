@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import img_icon from './img/icon.png';
-import {  Link, Redirect } from 'react-router-dom';
+import {  Link, Redirect, } from 'react-router-dom';
 import './Nav.css';
 import img_login from './img/login-icon.png';
 
@@ -12,14 +12,11 @@ class Nav extends Component {
       isSignedIn:false
     }
     this.signOut = this.signOut.bind(this);
-    console.log(this);
   }
 
 componentWillMount() {
   if(sessionStorage.getItem('userData')){
     this.setState({ isSignedIn: true })
-    console.log('this')
-    console.log(this)
   }
 }
 
