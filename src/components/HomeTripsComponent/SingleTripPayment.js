@@ -10,17 +10,18 @@ import Trip from './trip-data.json';
 // import img_save from './img/save-icon.png';
 // import img_pay from './img/pay-check.png';
 
-class SingleTripPayment extends Component {
+const BASE_URL = 'http://quest-test.herokuapp.com/api/';
 
+class SingleTripPayment extends Component {
 
   constructor(props){
     super(props);
     this.state = {
     		key: 'pk_test_8a48853663ac6b2c68f1e5cf9c346229c278d32d', //PAYSTACK PUBLIC KEY
-    		email: 'ksquare267@gmail.com',  // customer email
+    		email: '',  // customer email
     		amount: 0,//equals NGN100,
-        firstname: '',
-        lastname: '',
+        firstName: '',
+        lastName: '',
         passportNumber: '',
         phone: '',
         canPay: false,
@@ -37,7 +38,8 @@ class SingleTripPayment extends Component {
 
   callback = (response) => {
     console.log(response); // card charged successfully, get reference here
-    axios.get('http://rocky-tor-99302.herokuapp.com/api/quest/verify-payment/'+response.reference)
+    //axios.get('http://quest-test.herokuapp.com/api/quest/verify-payment/'+response.reference)
+    axios.get(`${BASE_URL}quest/verify-payment/${response.reference}`)
     .then((result) => {
     console.log(result);
     })
@@ -77,21 +79,51 @@ class SingleTripPayment extends Component {
     e.preventDefault();
   }
 
-  getUserData = () => {
+  getUserData = (response) => {
+    //Get Current User Data
+        const currentUser = sessionStorage.getItem('userID');
 
+        axios.get(`${BASE_URL}auth/${currentUser}/get-user`)
+        .then((response) => {
+          const userData = response.data.results[0];
+        this.setState({ email: userData.email,
+                        firstName: userData.first_name,
+                        lastName: userData.last_name,
+                        passportNumber: userData.passport_number,
+                        phone: userData.phone_number });
+       }).catch(function (error) {
+        console.log(error);
+      });
   }
 
+
+  // const newState = Object.assign({}, this.state, { email: userData.email,
+  //                                                 firstName: userData.first_name,
+  //                                                 lastName: userData.last_name,
+  //                                                 passportNumber: userData.passportNumber });
+  // this.setState({
+  //    email: userData.email,
+  //    // firstName: userData.first_name,
+  //    // lastName: userData.last_name,
+  //    // phone: userData.phone_number,
+  //    // passportNumber: userData.passport_number
+  // })
+  //this.setState(newState);
+
   componentDidMount () {
+
 
   }
 
   componentWillMount() {
-    // const user = sessionStorage.getItem('userData');
-    //   this.setState({ email: user.email });
     if(sessionStorage.getItem('userData')) {
       this.setState({ isSignedIn: true })
     }
+    this.setState({ canPay: true });
+    this.getUserData();
+    this.enablePayment();
 
+  // Get Current Trip Data
     const tripId = this.props.match.params.name;
       if (tripId !== "" && !tripId) {
         return(
@@ -106,9 +138,7 @@ class SingleTripPayment extends Component {
       getTrips: getTrip(tripId)
     });
   }
-
-  this.setState({ amount: this.state.getTrips.package_price });
-
+    this.setState({ amount: this.state.getTrips.package_price });
   }
 
   render() {
@@ -117,6 +147,7 @@ class SingleTripPayment extends Component {
     }
     const canPay = this.state.canPay;
     const selectedTrip = this.state.getTrips;
+
     return(
     <section>
      <div className="container">
@@ -139,8 +170,8 @@ class SingleTripPayment extends Component {
            <div className="row confirm-pay">
              <form className="confirm-pay-container">
                  <p><span>Email: </span><br/><input type="email" placeholder="" name="email" value={this.state.email} onChange={this.handleChange} /></p>
-                 <p><span>First Name</span> <br /><input type="text" placeholder="" name="firstname" value={this.state.firstname} onChange={this.handleChange} /></p>
-                 <p><span>Last Name</span> <br /><input type="text" placeholder="" name="lastname" value={this.state.lastname} onChange={this.handleChange} /></p>
+                 <p><span>First Name</span> <br /><input type="text" placeholder="" name="firstName" value={this.state.firstName} onChange={this.handleChange} /></p>
+                 <p><span>Last Name</span> <br /><input type="text" placeholder="" name="lastName" value={this.state.lastName} onChange={this.handleChange} /></p>
                  <p><span>Passport Number</span> <br /><input type="text" placeholder="" name="passportNumber" value={this.state.passportNumber} onChange={this.handleChange} /></p>
                  <p><span>Phone Number</span> <br /><input type="text" placeholder="" name="phone" value={this.state.phone} onChange={this.handleChange} /></p>
                  {(this.state.canPay === false) && (<div className="field-warning">You must fill up all fields to proceed to payment</div>)}

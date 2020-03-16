@@ -23,7 +23,7 @@ ul.header li a {
   padding: 20px;
   border-radius: 10px;
   color: rgb( 168, 0, 230 );
-  border: 3px solid rgb(255, 208, 0);
+  /* border: 3px solid rgb(255, 208, 0); */
 }
 .content h2 {
   text-transform: uppercase;

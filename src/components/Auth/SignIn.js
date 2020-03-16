@@ -59,6 +59,7 @@ class SignIn extends Component {
         console.log(responseJSON)
         if(responseJSON.user_id){
           sessionStorage.setItem('userData', responseJSON);
+          sessionStorage.setItem('userID', JSON.stringify(responseJSON.user_id));
           this.setState({isSignedIn: true});
           this.setState({loading: false});
         } else {
